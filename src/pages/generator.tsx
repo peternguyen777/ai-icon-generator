@@ -14,8 +14,6 @@ const GeneratePage: NextPage = () => {
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
-      console.log("mutation finished", data.imageUrl);
-
       setImageUrl(data.imageUrl);
     },
   });
@@ -70,20 +68,14 @@ const GeneratePage: NextPage = () => {
           </FormGroup>
           <Button>Submit</Button>
         </form>
-        {/* {imageUrl && (
+        {imageUrl && (
           <Image
             alt="an image of generated prompt"
             src={imageUrl}
             width={100}
             height={100}
           />
-        )} */}
-        <img
-          src={`data:image/png;base64,${imageUrl}`}
-          width={100}
-          height={100}
-          alt="an image of generated prompt"
-        />
+        )}
       </main>
     </>
   );

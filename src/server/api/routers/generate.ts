@@ -17,6 +17,8 @@ const openai = new OpenAI({
   apiKey: env.DALLE_API_KEY,
 });
 
+const BUCKET_NAME = "ai-icon-generator2";
+
 async function generateIcon(prompt: string): Promise<string | undefined> {
   if (env.MOCK_DALLE === "true") {
     return b64image;
@@ -27,7 +29,6 @@ async function generateIcon(prompt: string): Promise<string | undefined> {
       size: "512x512",
       response_format: "b64_json",
     });
-    console.log(response.data[0]?.b64_json);
     return response.data[0]?.b64_json;
   }
 }
@@ -59,6 +60,24 @@ export const generateRouter = createTRPCRouter({
 
       const base64EncodedImage = await generateIcon(input.prompt);
 
+      if (!base64EncodedImage) {
+        await ctx.prisma.user.updateMany({
+          where: {
+            id: ctx.session.user.id,
+          },
+          data: {
+            credits: {
+              increment: 1,
+            },
+          },
+        });
+
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "image failed to generate, credit refunded",
+        });
+      }
+
       const icon = await ctx.prisma.icon.create({
         data: {
           prompt: input.prompt,
@@ -68,8 +87,8 @@ export const generateRouter = createTRPCRouter({
 
       await s3
         .putObject({
-          Bucket: "ai-icon-generator2",
-          Body: Buffer.from(base64EncodedImage!, "base64"),
+          Bucket: BUCKET_NAME,
+          Body: Buffer.from(base64EncodedImage, "base64"),
           Key: icon.id,
           ContentEncoding: "base64",
           ContentType: "image/png",
@@ -77,7 +96,7 @@ export const generateRouter = createTRPCRouter({
         .promise();
 
       return {
-        imageUrl: base64EncodedImage,
+        imageUrl: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
       };
     }),
 });
