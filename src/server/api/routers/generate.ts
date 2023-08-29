@@ -3,10 +3,34 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import OpenAI from "openai";
 import { env } from "~/env.mjs";
+import { b64image } from "~/data/b64image";
+import AWS from "aws-sdk";
+
+const s3 = new AWS.S3({
+  credentials: {
+    accessKeyId: env.ACCESS_KEY_ID,
+    secretAccessKey: env.SECRET_ACCESS_KEY,
+  },
+});
 
 const openai = new OpenAI({
   apiKey: env.DALLE_API_KEY,
 });
+
+async function generateIcon(prompt: string): Promise<string | undefined> {
+  if (env.MOCK_DALLE === "true") {
+    return b64image;
+  } else {
+    const response = await openai.images.generate({
+      prompt,
+      n: 1,
+      size: "512x512",
+      response_format: "b64_json",
+    });
+    console.log(response.data[0]?.b64_json);
+    return response.data[0]?.b64_json;
+  }
+}
 
 export const generateRouter = createTRPCRouter({
   generateIcon: protectedProcedure
@@ -33,16 +57,27 @@ export const generateRouter = createTRPCRouter({
         });
       }
 
-      const response = await openai.images.generate({
-        prompt: input.prompt,
-        n: 1,
-        size: "1024x1024",
+      const base64EncodedImage = await generateIcon(input.prompt);
+
+      const icon = await ctx.prisma.icon.create({
+        data: {
+          prompt: input.prompt,
+          userId: ctx.session.user.id,
+        },
       });
 
-      const url = response.data[0]?.url;
+      await s3
+        .putObject({
+          Bucket: "ai-icon-generator2",
+          Body: Buffer.from(base64EncodedImage!, "base64"),
+          Key: icon.id,
+          ContentEncoding: "base64",
+          ContentType: "image/png",
+        })
+        .promise();
 
       return {
-        imageUrl: url,
+        imageUrl: base64EncodedImage,
       };
     }),
 });
