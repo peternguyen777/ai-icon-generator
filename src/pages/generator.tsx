@@ -4,7 +4,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "~/component/Button";
-import { Formgroup } from "~/component/Formgroup";
 import { Input } from "~/component/Input";
 import { api } from "../utils/api";
 
@@ -62,10 +61,10 @@ const GeneratePage: NextPage = () => {
           </Button>
         )}
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-          <Formgroup>
+          <div className="flex flex-col gap-1">
             <label>Prompt</label>
             <Input value={form.prompt} onChange={updateForm("prompt")} />
-          </Formgroup>
+          </div>
           <Button>Submit</Button>
         </form>
         {imageUrl && (
