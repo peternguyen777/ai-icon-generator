@@ -3,8 +3,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "~/component/Button";
-import { Input } from "~/component/Input";
+import Button from "~/component/Button";
+import Formgroup from "~/component/Formgroup";
+import Input from "~/component/Input";
 import { api } from "../utils/api";
 
 const GeneratePage: NextPage = () => {
@@ -61,10 +62,10 @@ const GeneratePage: NextPage = () => {
           </Button>
         )}
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-          <div className="flex flex-col gap-1">
+          <Formgroup>
             <label>Prompt</label>
             <Input value={form.prompt} onChange={updateForm("prompt")} />
-          </div>
+          </Formgroup>
           <Button>Submit</Button>
         </form>
         {imageUrl && (
