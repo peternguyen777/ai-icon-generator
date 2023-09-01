@@ -13,7 +13,7 @@ export const Header = () => {
       <PrimaryLink href="/">Icon Generator</PrimaryLink>
       <ul>
         <li>
-          <PrimaryLink href="/generator">Generate</PrimaryLink>
+          <PrimaryLink href="/generate">Generate</PrimaryLink>
         </li>
       </ul>
       <ul className="flex gap-4">
