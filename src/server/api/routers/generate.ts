@@ -60,24 +60,6 @@ export const generateRouter = createTRPCRouter({
 
       const base64EncodedImage = await generateIcon(input.prompt);
 
-      if (!base64EncodedImage) {
-        await ctx.prisma.user.updateMany({
-          where: {
-            id: ctx.session.user.id,
-          },
-          data: {
-            credits: {
-              increment: 1,
-            },
-          },
-        });
-
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: "image failed to generate, credit refunded",
-        });
-      }
-
       const icon = await ctx.prisma.icon.create({
         data: {
           prompt: input.prompt,
@@ -88,7 +70,7 @@ export const generateRouter = createTRPCRouter({
       await s3
         .putObject({
           Bucket: BUCKET_NAME,
-          Body: Buffer.from(base64EncodedImage, "base64"),
+          Body: Buffer.from(base64EncodedImage!, "base64"),
           Key: icon.id,
           ContentEncoding: "base64",
           ContentType: "image/png",
