@@ -1,6 +1,6 @@
 import React from "react";
 
-function Button(props: React.ComponentPropsWithoutRef<"button">) {
+export function Button(props: React.ComponentPropsWithoutRef<"button">) {
   return (
     <button
       {...props}
@@ -10,5 +10,3 @@ function Button(props: React.ComponentPropsWithoutRef<"button">) {
     </button>
   );
 }
-
-export default Button;

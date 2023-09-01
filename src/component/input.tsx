@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input(props: React.ComponentPropsWithoutRef<"input">) {
+export function Input(props: React.ComponentPropsWithoutRef<"input">) {
   return (
     <input
       {...props}
@@ -8,5 +8,3 @@ function Input(props: React.ComponentPropsWithoutRef<"input">) {
     />
   );
 }
-
-export default Input;
