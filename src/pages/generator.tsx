@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Button from "~/component/Button";
 // import Formgroup from "~/component/Formgroup";
-import Input from "~/component/Input";
+// import Input from "~/component/Input";
 import { api } from "../utils/api";
 
 const GeneratePage: NextPage = () => {
@@ -63,8 +63,14 @@ const GeneratePage: NextPage = () => {
         )}
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
           {/* <Formgroup> */}
-          <label>Prompt</label>
-          <Input value={form.prompt} onChange={updateForm("prompt")} />
+          <div className="flex flex-col gap-1">
+            <label>Prompt</label>
+            {/* <Input value={form.prompt} onChange={updateForm("prompt")} /> */}
+            <input
+              onChange={updateForm("prompt")}
+              className="rounded border border-gray-800 px-4 py-2 dark:text-gray-800"
+            />
+          </div>
           {/* </Formgroup> */}
           <Button>Submit</Button>
         </form>
