@@ -7,10 +7,12 @@ import { Button } from "~/components/button";
 import { Formgroup } from "~/components/formgroup";
 import { Input } from "~/components/input";
 import { api } from "../utils/api";
+import { useBuyCredits } from "~/hooks/useBuyCredits";
 
 const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({ prompt: "" });
   const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const { buyCredits } = useBuyCredits();
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
@@ -53,13 +55,22 @@ const GeneratePage: NextPage = () => {
           </Button>
         )}
         {isLoggedIn && (
-          <Button
-            onClick={() => {
-              signOut().catch(console.error);
-            }}
-          >
-            Logout
-          </Button>
+          <>
+            <Button
+              onClick={() => {
+                buyCredits().catch(console.error);
+              }}
+            >
+              Buy Credits
+            </Button>
+            <Button
+              onClick={() => {
+                signOut().catch(console.error);
+              }}
+            >
+              Logout
+            </Button>
+          </>
         )}
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
           <Formgroup>
