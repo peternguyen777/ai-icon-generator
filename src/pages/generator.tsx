@@ -1,13 +1,13 @@
 import { type NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "~/components/button";
-import { Formgroup } from "~/components/formgroup";
-import { Input } from "~/components/input";
-import { api } from "../utils/api";
+import { Button } from "~/components/Button";
+import { FormGroup } from "~/components/FormGroup";
+import { Input } from "~/components/Input";
 import { useBuyCredits } from "~/hooks/useBuyCredits";
+import { api } from "../utils/api";
 
 const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({ prompt: "" });
@@ -45,38 +45,20 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center">
-        {!isLoggedIn && (
+        {isLoggedIn && (
           <Button
             onClick={() => {
-              signIn().catch(console.error);
+              buyCredits().catch(console.error);
             }}
           >
-            Login
+            Buy Credits
           </Button>
         )}
-        {isLoggedIn && (
-          <>
-            <Button
-              onClick={() => {
-                buyCredits().catch(console.error);
-              }}
-            >
-              Buy Credits
-            </Button>
-            <Button
-              onClick={() => {
-                signOut().catch(console.error);
-              }}
-            >
-              Logout
-            </Button>
-          </>
-        )}
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-          <Formgroup>
+          <FormGroup>
             <label>Prompt</label>
             <Input value={form.prompt} onChange={updateForm("prompt")} />
-          </Formgroup>
+          </FormGroup>
           <Button>Submit</Button>
         </form>
         {imageUrl && (
