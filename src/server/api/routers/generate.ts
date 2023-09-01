@@ -35,7 +35,12 @@ async function generateIcon(prompt: string): Promise<string | undefined> {
 
 export const generateRouter = createTRPCRouter({
   generateIcon: protectedProcedure
-    .input(z.object({ prompt: z.string() }))
+    .input(
+      z.object({
+        prompt: z.string(),
+        color: z.string(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       const { count } = await ctx.prisma.user.updateMany({
         where: {
@@ -58,7 +63,9 @@ export const generateRouter = createTRPCRouter({
         });
       }
 
-      const base64EncodedImage = await generateIcon(input.prompt);
+      const finalPrompt = `a modern icon in ${input.color} of ${input.prompt}, pixel style, minimalistic`;
+
+      const base64EncodedImage = await generateIcon(finalPrompt);
 
       const icon = await ctx.prisma.icon.create({
         data: {
