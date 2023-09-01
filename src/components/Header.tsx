@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import { PrimaryLink } from "./primarylink";
-import { Button } from "./button";
+import { PrimaryLink } from "./Primarylink";
+import { Button } from "./Button";
 
 export const Header = () => {
   const session = useSession();

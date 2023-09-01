@@ -3,9 +3,9 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "~/components/button";
-import { FormGroup } from "~/components/formGroup";
-import { Input } from "~/components/input";
+import { Button } from "~/components/Button";
+import { FormGroup } from "~/components/FormGroup";
+import { Input } from "~/components/Input";
 import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { api } from "../utils/api";
 
