@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Button(props: React.ComponentPropsWithoutRef<"button">) {
+export const Button = (props: React.ComponentPropsWithoutRef<"button">) => {
   return (
     <button
       {...props}
@@ -9,4 +9,4 @@ export function Button(props: React.ComponentPropsWithoutRef<"button">) {
       {props.children}
     </button>
   );
-}
+};
