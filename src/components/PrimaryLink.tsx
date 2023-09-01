@@ -1,5 +1,4 @@
-import type { LinkProps } from "next/link";
-import Link from "next/link";
+import Link, { type LinkProps } from "next/link";
 import type { ReactNode } from "react";
 
 export const PrimaryLink = (props: LinkProps & { children: ReactNode }) => {

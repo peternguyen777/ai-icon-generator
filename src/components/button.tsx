@@ -8,7 +8,7 @@ export const Button = (
 ) => {
   const color =
     (props.variant ?? "primary") === "primary"
-      ? "bg-blue-400 hover:bg-yellow-500"
+      ? "bg-blue-400 hover:bg-blue-500"
       : "bg-gray-400 hover:bg-gray-500";
 
   return (

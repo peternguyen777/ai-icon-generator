@@ -1,18 +1,15 @@
 import { type NextPage } from "next";
-import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "~/components/Button";
 import { FormGroup } from "~/components/FormGroup";
 import { Input } from "~/components/Input";
-import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { api } from "../utils/api";
 
 const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({ prompt: "" });
   const [imageUrl, setImageUrl] = useState<string | undefined>();
-  const { buyCredits } = useBuyCredits();
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
@@ -33,10 +30,6 @@ const GeneratePage: NextPage = () => {
     setForm({ prompt: "" });
   }
 
-  const session = useSession();
-
-  const isLoggedIn = !!session.data;
-
   return (
     <>
       <Head>
@@ -45,15 +38,6 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center">
-        {isLoggedIn && (
-          <Button
-            onClick={() => {
-              buyCredits().catch(console.error);
-            }}
-          >
-            Buy Credits
-          </Button>
-        )}
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
           <FormGroup>
             <label>Prompt</label>
@@ -65,8 +49,8 @@ const GeneratePage: NextPage = () => {
           <Image
             alt="an image of generated prompt"
             src={imageUrl}
-            width={100}
-            height={100}
+            width={500}
+            height={500}
           />
         )}
       </main>
