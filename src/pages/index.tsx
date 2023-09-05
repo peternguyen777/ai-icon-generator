@@ -1,7 +1,9 @@
+import clsx from "clsx";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { PrimaryLinkButton } from "~/components/primarylinkbutton";
+import Link from "next/link";
+import { buttonVariants } from "~/components/ui/button";
 
 const HeroBanner = () => {
   return (
@@ -12,9 +14,12 @@ const HeroBanner = () => {
           Use AI to generate icons in seconds instead of paying a designer and
           waiting for them to create them for you.
         </p>
-        <PrimaryLinkButton href="/generate" className="self-start">
+        <Link
+          href="/generate"
+          className={clsx(buttonVariants({ variant: "default" }), "self-start")}
+        >
           Generate your Icons
-        </PrimaryLinkButton>
+        </Link>
       </div>
       <Image
         src="/banner.png"

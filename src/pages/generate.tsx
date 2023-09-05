@@ -7,8 +7,6 @@ import { Input } from "~/components/input";
 import { api } from "../utils/api";
 import { Button } from "~/components/button";
 import { useSession } from "next-auth/react";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { Label } from "@radix-ui/react-label";
 
 const COLORS = [
   "blue",
