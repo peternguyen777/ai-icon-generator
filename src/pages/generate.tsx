@@ -6,6 +6,7 @@ import { FormGroup } from "~/components/formgroup";
 import { Input } from "~/components/input";
 import { api } from "../utils/api";
 import { Button } from "~/components/button";
+import { useSession } from "next-auth/react";
 
 const COLORS = [
   "blue",
@@ -38,6 +39,8 @@ const GeneratePage: NextPage = () => {
   });
   const [imageUrls, setImageUrls] = useState<{ imageUrl: string }[]>([]);
   const [error, setError] = useState<string | undefined>();
+  const session = useSession();
+  const isLoggedIn = !!session.data;
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
@@ -71,103 +74,112 @@ const GeneratePage: NextPage = () => {
       </Head>
       <main className="container mx-auto mt-24 flex min-h-screen flex-col px-8">
         <h1 className="text-6xl">Generate your icon</h1>
-        <p className="mb-12 text-2xl">
-          Fill out the form below to start generating your icons.
-        </p>
-        <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-          <h2 className="text-xl">
-            1. Describe what you want your icon to look like.
-          </h2>
-          <FormGroup className="mb-12">
-            <label>Prompt</label>
-            <Input
-              required
-              value={form.prompt}
-              onChange={updateForm("prompt")}
-            />
-          </FormGroup>
-          <h2 className="text-xl">2. Pick your icon color.</h2>
-          <FormGroup className="mb-12 grid grid-cols-4">
-            {COLORS.map((color) => (
-              <label key={color} className="flex gap-2 text-2xl">
-                <input
-                  required
-                  type="radio"
-                  name="color"
-                  value={color}
-                  onChange={updateForm("color")}
-                />
-                {color}
-              </label>
-            ))}
-          </FormGroup>
-          <h2 className="text-xl">3. Pick your icon shape</h2>
-          <FormGroup className="mb-12 grid grid-cols-4">
-            {SHAPES.map((shape) => (
-              <label key={shape} className="flex gap-2 text-2xl">
-                <input
-                  required
-                  type="radio"
-                  name="shape"
-                  value={shape}
-                  onChange={updateForm("shape")}
-                />
-                {shape}
-              </label>
-            ))}
-          </FormGroup>
-          <h2 className="text-xl">4. Pick your style</h2>
-          <FormGroup className="mb-12 grid grid-cols-4">
-            {STYLES.map((style) => (
-              <label key={style} className="flex gap-2 text-2xl">
-                <input
-                  required
-                  type="radio"
-                  name="style"
-                  value={style}
-                  onChange={updateForm("style")}
-                />
-                {style}
-              </label>
-            ))}
-          </FormGroup>
-          <h2 className="text-xl">5. How many do you want?</h2>
-          <FormGroup className="mb-12">
-            <label>Number of icons</label>
-            <Input
-              inputMode="numeric"
-              pattern="[0-9]|10"
-              type="number"
-              value={form.numberOfIcons}
-              onChange={updateForm("numberOfIcons")}
-            />
-          </FormGroup>
-          {error && (
-            <div className="rounded bg-red-500 p-8 text-xl text-white">
-              {error}
-            </div>
-          )}
-          <Button
-            isLoading={generateIcon.isLoading}
-            disabled={generateIcon.isLoading}
-          >
-            Submit
-          </Button>
-        </form>
-        {imageUrls.length > 0 && (
+        {!isLoggedIn && (
+          <p className="mb-12 text-2xl">
+            Please log in to start generating your icons.
+          </p>
+        )}
+        {isLoggedIn && (
           <>
-            <h2 className="mt-12 text-xl">Your Icons</h2>
-            <section className="mb-12 grid grid-cols-4 gap-4">
-              {imageUrls.map((image) => (
-                <Image
-                  key={image.imageUrl}
-                  alt="an image of generated prompt"
-                  src={image.imageUrl}
-                  width={256}
-                  height={256}
+            <p className="mb-12 text-2xl">
+              Fill out the form below to start generating your icons.
+            </p>
+            <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
+              <h2 className="text-xl">
+                1. Describe what you want your icon to look like.
+              </h2>
+              <FormGroup className="mb-12">
+                <label>Prompt</label>
+                <Input
+                  required
+                  value={form.prompt}
+                  onChange={updateForm("prompt")}
                 />
-              ))}
-            </section>
+              </FormGroup>
+              <h2 className="text-xl">2. Pick your icon color.</h2>
+              <FormGroup className="mb-12 grid grid-cols-4">
+                {COLORS.map((color) => (
+                  <label key={color} className="flex gap-2 text-2xl">
+                    <input
+                      required
+                      type="radio"
+                      name="color"
+                      value={color}
+                      onChange={updateForm("color")}
+                    />
+                    {color}
+                  </label>
+                ))}
+              </FormGroup>
+              <h2 className="text-xl">3. Pick your icon shape</h2>
+              <FormGroup className="mb-12 grid grid-cols-4">
+                {SHAPES.map((shape) => (
+                  <label key={shape} className="flex gap-2 text-2xl">
+                    <input
+                      required
+                      type="radio"
+                      name="shape"
+                      value={shape}
+                      onChange={updateForm("shape")}
+                    />
+                    {shape}
+                  </label>
+                ))}
+              </FormGroup>
+              <h2 className="text-xl">4. Pick your style</h2>
+              <FormGroup className="mb-12 grid grid-cols-4">
+                {STYLES.map((style) => (
+                  <label key={style} className="flex gap-2 text-2xl">
+                    <input
+                      required
+                      type="radio"
+                      name="style"
+                      value={style}
+                      onChange={updateForm("style")}
+                    />
+                    {style}
+                  </label>
+                ))}
+              </FormGroup>
+              <h2 className="text-xl">5. How many do you want?</h2>
+              <FormGroup className="mb-12">
+                <label>Number of icons</label>
+                <Input
+                  inputMode="numeric"
+                  pattern="[0-9]|10"
+                  type="number"
+                  value={form.numberOfIcons}
+                  onChange={updateForm("numberOfIcons")}
+                />
+              </FormGroup>
+              {error && (
+                <div className="rounded bg-red-500 p-8 text-xl text-white">
+                  {error}
+                </div>
+              )}
+              <Button
+                isLoading={generateIcon.isLoading}
+                disabled={generateIcon.isLoading}
+              >
+                Submit
+              </Button>
+            </form>
+            {imageUrls.length > 0 && (
+              <>
+                <h2 className="mt-12 text-xl">Your Icons</h2>
+                <section className="mb-12 grid grid-cols-4 gap-4">
+                  {imageUrls.map((image) => (
+                    <Image
+                      key={image.imageUrl}
+                      alt="an image of generated prompt"
+                      src={image.imageUrl}
+                      width={256}
+                      height={256}
+                    />
+                  ))}
+                </section>
+              </>
+            )}
           </>
         )}
       </main>
