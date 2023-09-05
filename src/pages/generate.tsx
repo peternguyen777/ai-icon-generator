@@ -37,26 +37,23 @@ const GeneratePage: NextPage = () => {
     numberOfIcons: "1",
   });
   const [imageUrls, setImageUrls] = useState<{ imageUrl: string }[]>([]);
+  const [error, setError] = useState<string | undefined>();
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
       setImageUrls(data);
     },
+    onError: (error) => {
+      setError(error.message);
+    },
   });
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log(form);
+    setError("");
     generateIcon.mutate({
       ...form,
       numberOfIcons: parseInt(form.numberOfIcons),
-    });
-    setForm({
-      prompt: "",
-      color: "",
-      shape: "",
-      style: "",
-      numberOfIcons: "1",
     });
   }
 
@@ -145,6 +142,11 @@ const GeneratePage: NextPage = () => {
               onChange={updateForm("numberOfIcons")}
             />
           </FormGroup>
+          {error && (
+            <div className="rounded bg-red-500 p-8 text-xl text-white">
+              {error}
+            </div>
+          )}
           <Button
             isLoading={generateIcon.isLoading}
             disabled={generateIcon.isLoading}
@@ -154,7 +156,7 @@ const GeneratePage: NextPage = () => {
         </form>
         {imageUrls.length > 0 && (
           <>
-            <h2 className="text-xl">Your Icons</h2>
+            <h2 className="mt-12 text-xl">Your Icons</h2>
             <section className="mb-12 grid grid-cols-4 gap-4">
               {imageUrls.map((image) => (
                 <Image

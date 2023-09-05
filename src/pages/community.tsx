@@ -17,7 +17,7 @@ const CommunityPage: NextPage = () => {
       </Head>
       <main className="container mx-auto mt-24 flex min-h-screen flex-col px-8">
         <h1 className="text-4xl">Community icons</h1>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
+        <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
           {icons.data?.map((icon) => (
             <li key={icon.id}>
               <Image
