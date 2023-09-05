@@ -54,7 +54,7 @@ export const generateRouter = createTRPCRouter({
         },
         data: {
           credits: {
-            decrement: 1,
+            decrement: input.numberOfIcons,
           },
         },
       });
