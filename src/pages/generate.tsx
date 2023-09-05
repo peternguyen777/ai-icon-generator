@@ -18,10 +18,22 @@ const COLORS = [
   "black",
 ];
 
+const SHAPES = ["square", "circle", "rounded"];
+
+const STYLES = [
+  "claymorphic",
+  "3d rendered",
+  "pixelated",
+  "illustrated with color pencil",
+  "watercolor",
+];
+
 const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({
     prompt: "",
     color: "",
+    shape: "",
+    style: "",
     numberOfIcons: "1",
   });
   const [imageUrls, setImageUrls] = useState<{ imageUrl: string }[]>([]);
@@ -39,7 +51,13 @@ const GeneratePage: NextPage = () => {
       ...form,
       numberOfIcons: parseInt(form.numberOfIcons),
     });
-    setForm({ prompt: "", color: "", numberOfIcons: "1" });
+    setForm({
+      prompt: "",
+      color: "",
+      shape: "",
+      style: "",
+      numberOfIcons: "1",
+    });
   }
 
   function updateForm(key: string) {
@@ -86,7 +104,37 @@ const GeneratePage: NextPage = () => {
               </label>
             ))}
           </FormGroup>
-          <h2 className="text-xl">3. How many do you want?</h2>
+          <h2 className="text-xl">3. Pick your icon shape</h2>
+          <FormGroup className="mb-12 grid grid-cols-4">
+            {SHAPES.map((shape) => (
+              <label key={shape} className="flex gap-2 text-2xl">
+                <input
+                  required
+                  type="radio"
+                  name="shape"
+                  value={shape}
+                  onChange={updateForm("shape")}
+                />
+                {shape}
+              </label>
+            ))}
+          </FormGroup>
+          <h2 className="text-xl">4. Pick your style</h2>
+          <FormGroup className="mb-12 grid grid-cols-4">
+            {STYLES.map((style) => (
+              <label key={style} className="flex gap-2 text-2xl">
+                <input
+                  required
+                  type="radio"
+                  name="style"
+                  value={style}
+                  onChange={updateForm("style")}
+                />
+                {style}
+              </label>
+            ))}
+          </FormGroup>
+          <h2 className="text-xl">5. How many do you want?</h2>
           <FormGroup className="mb-12">
             <label>Number of icons</label>
             <Input
@@ -113,8 +161,8 @@ const GeneratePage: NextPage = () => {
                   key={image.imageUrl}
                   alt="an image of generated prompt"
                   src={image.imageUrl}
-                  width={500}
-                  height={500}
+                  width={256}
+                  height={256}
                 />
               ))}
             </section>
