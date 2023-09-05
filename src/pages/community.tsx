@@ -5,18 +5,18 @@ import { api } from "~/utils/api";
 
 const BUCKET_NAME = "ai-icon-generator2";
 
-const CollectionPage: NextPage = () => {
-  const icons = api.icons.getIcons.useQuery();
+const CommunityPage: NextPage = () => {
+  const icons = api.icons.getCommunityIcons.useQuery();
 
   return (
     <>
       <Head>
-        <title>Your Icons</title>
-        <meta name="description" content="Your icons" />
+        <title>Community Icons</title>
+        <meta name="description" content="Community icons" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto mt-24 flex min-h-screen flex-col px-8">
-        <h1 className="text-4xl">Your icons</h1>
+        <h1 className="text-4xl">Community icons</h1>
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
           {icons.data?.map((icon) => (
             <li key={icon.id}>
@@ -35,4 +35,4 @@ const CollectionPage: NextPage = () => {
   );
 };
 
-export default CollectionPage;
+export default CommunityPage;

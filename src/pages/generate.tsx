@@ -19,19 +19,27 @@ const COLORS = [
 ];
 
 const GeneratePage: NextPage = () => {
-  const [form, setForm] = useState({ prompt: "", color: "" });
-  const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const [form, setForm] = useState({
+    prompt: "",
+    color: "",
+    numberOfIcons: "1",
+  });
+  const [imageUrls, setImageUrls] = useState<{ imageUrl: string }[]>([]);
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
-      setImageUrl(data.imageUrl);
+      setImageUrls(data);
     },
   });
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
-    generateIcon.mutate(form);
-    setForm({ prompt: "", color: "" });
+    console.log(form);
+    generateIcon.mutate({
+      ...form,
+      numberOfIcons: parseInt(form.numberOfIcons),
+    });
+    setForm({ prompt: "", color: "", numberOfIcons: "1" });
   }
 
   function updateForm(key: string) {
@@ -57,21 +65,37 @@ const GeneratePage: NextPage = () => {
           </h2>
           <FormGroup className="mb-12">
             <label>Prompt</label>
-            <Input value={form.prompt} onChange={updateForm("prompt")} />
+            <Input
+              required
+              value={form.prompt}
+              onChange={updateForm("prompt")}
+            />
           </FormGroup>
           <h2 className="text-xl">2. Pick your icon color.</h2>
           <FormGroup className="mb-12 grid grid-cols-4">
             {COLORS.map((color) => (
               <label key={color} className="flex gap-2 text-2xl">
                 <input
+                  required
                   type="radio"
                   name="color"
                   value={color}
-                  onChange={() => setForm((prev) => ({ ...prev, color }))}
+                  onChange={updateForm("color")}
                 />
                 {color}
               </label>
             ))}
+          </FormGroup>
+          <h2 className="text-xl">3. How many do you want?</h2>
+          <FormGroup className="mb-12">
+            <label>Number of icons</label>
+            <Input
+              inputMode="numeric"
+              pattern="[0-9]|10"
+              type="number"
+              value={form.numberOfIcons}
+              onChange={updateForm("numberOfIcons")}
+            />
           </FormGroup>
           <Button
             isLoading={generateIcon.isLoading}
@@ -80,16 +104,19 @@ const GeneratePage: NextPage = () => {
             Submit
           </Button>
         </form>
-        {imageUrl && (
+        {imageUrls.length > 0 && (
           <>
             <h2 className="text-xl">Your Icons</h2>
             <section className="mb-12 grid grid-cols-4 gap-4">
-              <Image
-                alt="an image of generated prompt"
-                src={imageUrl}
-                width={500}
-                height={500}
-              />
+              {imageUrls.map((image) => (
+                <Image
+                  key={image.imageUrl}
+                  alt="an image of generated prompt"
+                  src={image.imageUrl}
+                  width={500}
+                  height={500}
+                />
+              ))}
             </section>
           </>
         )}
