@@ -74,30 +74,34 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto mt-24 flex min-h-screen flex-col px-8">
-        <h1 className="text-6xl">Generate your icon</h1>
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          Generate your icon
+        </h1>
         {!isLoggedIn && (
-          <p className="mb-12 text-2xl">
+          <p className="leading-7 [&:not(:first-child)]:mt-6">
             Please log in to start generating your icons.
           </p>
         )}
         {isLoggedIn && (
           <>
-            <p className="mb-12 text-2xl">
+            <p className="mb-12 leading-7">
               Fill out the form below to start generating your icons.
             </p>
             <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-              <h2 className="text-xl">
+              <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
                 1. Describe what you want your icon to look like.
-              </h2>
+              </h4>
               <FormGroup className="mb-12">
-                <label>Prompt</label>
+                <label className="leading-7">Prompt</label>
                 <Input
                   required
                   value={form.prompt}
                   onChange={updateForm("prompt")}
                 />
               </FormGroup>
-              <h2 className="text-xl">2. Pick your icon color.</h2>
+              <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+                2. Pick your icon color.
+              </h4>
               <FormGroup className="mb-12 grid grid-cols-4">
                 {COLORS.map((color) => (
                   <label key={color} className="flex gap-2 text-2xl">
@@ -112,7 +116,9 @@ const GeneratePage: NextPage = () => {
                   </label>
                 ))}
               </FormGroup>
-              <h2 className="text-xl">3. Pick your icon shape</h2>
+              <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+                3. Pick your icon shape
+              </h4>
               <FormGroup className="mb-12 grid grid-cols-4">
                 {SHAPES.map((shape) => (
                   <label key={shape} className="flex gap-2 text-2xl">
@@ -127,7 +133,9 @@ const GeneratePage: NextPage = () => {
                   </label>
                 ))}
               </FormGroup>
-              <h2 className="text-xl">4. Pick your style</h2>
+              <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+                4. Pick your style
+              </h4>
               <FormGroup className="mb-12 grid grid-cols-4">
                 {STYLES.map((style) => (
                   <label key={style} className="flex gap-2 text-2xl">
@@ -142,7 +150,9 @@ const GeneratePage: NextPage = () => {
                   </label>
                 ))}
               </FormGroup>
-              <h2 className="text-xl">5. How many do you want?</h2>
+              <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+                5. How many do you want?
+              </h4>
               <FormGroup className="mb-12">
                 <label>Number of icons</label>
                 <Input
