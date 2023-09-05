@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { PrimaryLink } from "./primarylink";
-import { Button } from "./button";
+import { Button } from "./ui/button";
 import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { api } from "~/utils/api";
 
@@ -30,9 +30,9 @@ export const Header = () => {
       <ul className="flex gap-4">
         {isLoggedIn && (
           <>
-            <div className="flex items-center">
+            <p className="flex items-center text-sm">
               Credits Remaining {credits.data}
-            </div>
+            </p>
             <li>
               <Button
                 onClick={() => {

@@ -3,7 +3,10 @@ import type { ReactNode } from "react";
 
 export const PrimaryLink = (props: LinkProps & { children: ReactNode }) => {
   return (
-    <Link {...props} className="hover:text-cyan-500">
+    <Link
+      {...props}
+      className="text-sm font-medium transition-colors hover:text-primary"
+    >
       {props.children}
     </Link>
   );
