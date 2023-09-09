@@ -104,7 +104,7 @@ export function InputForm({
   function onSubmit(data: z.infer<typeof FormSchema>) {
     generateIcon.mutate(data);
     toast({
-      title: "You submitted the following values:",
+      title: "You submitted the prompt:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -119,12 +119,6 @@ export function InputForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col space-y-6"
       >
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Generate your icon
-        </h1>
-        <p className=" leading-7">
-          Fill out the form below to start generating your icons.
-        </p>
         <FormField
           control={form.control}
           name="prompt"
@@ -214,7 +208,7 @@ export function InputForm({
             </FormItem>
           )}
         />
-        <Button type="submit">
+        <Button type="submit" disabled={generateIcon.isLoading}>
           {generateIcon.isLoading && <Spinner />}
           Submit
         </Button>
