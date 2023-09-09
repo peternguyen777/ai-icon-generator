@@ -32,7 +32,7 @@ const GeneratePage: NextPage = () => {
         {isLoggedIn && (
           <div className="grid lg:grid-cols-3 lg:gap-8">
             <div className="w-full lg:col-span-1 lg:mr-8">
-              <InputForm setImageUrls={setImageUrls} />
+              <InputForm setImageUrls={setImageUrls} imageUrls={imageUrls} />
             </div>
             <div className="mt-8 w-full flex-row rounded-lg border bg-gray-50 p-8 lg:col-span-2 lg:mt-0">
               <p className="leading-7">Your Icons</p>

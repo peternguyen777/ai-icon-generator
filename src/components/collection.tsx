@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { RouterOutputs } from "~/utils/api";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 type Icons = RouterOutputs["icons"]["getIcons"];
 
@@ -18,22 +24,31 @@ export const Collection = ({ title, icons }: CollectionProps) => {
         {title}
       </h1>
       <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
-        {icons.map((icon) => (
-          <li key={icon.id}>
-            <Link
-              href={`https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
-              target="_blank"
-            >
-              <Image
-                src={`https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
-                className="w-full rounded-lg"
-                height="128"
-                width="128"
-                alt={icon.prompt ?? "an image of an icon"}
-              />
-            </Link>
-          </li>
-        ))}
+        <TooltipProvider>
+          {icons.map((icon) => (
+            <li key={icon.id}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={`https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
+                    target="_blank"
+                  >
+                    <Image
+                      src={`https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
+                      className="w-full rounded-lg"
+                      height="128"
+                      width="128"
+                      alt={icon.prompt ?? "an image of an icon"}
+                    />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{icon.prompt}</p>
+                </TooltipContent>
+              </Tooltip>
+            </li>
+          ))}
+        </TooltipProvider>
       </ul>
     </main>
   );

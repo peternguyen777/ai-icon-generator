@@ -68,6 +68,7 @@ const FormSchema = z.object({
 
 export function InputForm({
   setImageUrls,
+  imageUrls,
 }: {
   setImageUrls: Dispatch<
     SetStateAction<
@@ -76,6 +77,7 @@ export function InputForm({
       }[]
     >
   >;
+  imageUrls: { imageUrl: string }[];
 }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -83,7 +85,8 @@ export function InputForm({
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
-      setImageUrls(data);
+      setImageUrls([...data, ...imageUrls]);
+      form.reset();
       toast({
         title: "Success!",
         description: <p>{`Image successfully generated`}</p>,
@@ -98,7 +101,6 @@ export function InputForm({
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("submit data", data);
     generateIcon.mutate(data);
     toast({
       title: "You submitted the following values:",
