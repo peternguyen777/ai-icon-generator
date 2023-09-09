@@ -6,8 +6,6 @@ import { api } from "~/utils/api";
 const CollectionPage: NextPage = () => {
   const icons = api.icons.getIcons.useQuery();
 
-  if (!icons.data) return;
-
   return (
     <>
       <Head>
@@ -15,7 +13,7 @@ const CollectionPage: NextPage = () => {
         <meta name="description" content="Your icons" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Collection title={"Your icons"} icons={icons.data} />
+      {icons.data && <Collection title={"Your icons"} icons={icons.data} />}
     </>
   );
 };
