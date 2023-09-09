@@ -13,8 +13,10 @@ const BUCKET_NAME = "ai-icon-generator2";
 
 export const Collection = ({ title, icons }: CollectionProps) => {
   return (
-    <main className="container mx-auto mt-24 flex min-h-screen flex-col px-8">
-      <h1 className="text-4xl">{title}</h1>
+    <main className="container mx-auto my-12 flex min-h-screen flex-col px-8">
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        {title}
+      </h1>
       <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
         {icons.map((icon) => (
           <li key={icon.id}>

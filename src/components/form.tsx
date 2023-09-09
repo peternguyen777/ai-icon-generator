@@ -116,6 +116,9 @@ export function InputForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col space-y-6"
       >
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          Generate your icon
+        </h1>
         <p className=" leading-7">
           Fill out the form below to start generating your icons.
         </p>
