@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Spinner } from "./spinner";
 
 const COLOURS = [
   "Blue",
@@ -213,7 +214,10 @@ export function InputForm({
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {generateIcon.isLoading && <Spinner />}
+          Submit
+        </Button>
       </form>
     </Form>
   );
