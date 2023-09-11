@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
+import { type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -18,7 +15,9 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { toast } from "~/components/ui/use-toast";
+import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { api } from "~/utils/api";
+import { Spinner } from "./spinner";
 import {
   Select,
   SelectContent,
@@ -26,7 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { Spinner } from "./spinner";
 
 const COLOURS = [
   "Blue",
@@ -83,6 +81,7 @@ export function InputForm({
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+  const { buyCredits } = useBuyCredits();
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
@@ -196,6 +195,7 @@ export function InputForm({
         <FormField
           control={form.control}
           name="numberOfIcons"
+          defaultValue={1}
           render={({ field }) => (
             <FormItem>
               <FormLabel>4. Number of icons</FormLabel>
@@ -203,7 +203,7 @@ export function InputForm({
                 <Input
                   {...field}
                   type="number"
-                  defaultValue={1}
+                  defaultValue={field.value}
                   min={1}
                   max={10}
                   {...form.register("numberOfIcons", { valueAsNumber: true })}
@@ -220,14 +220,27 @@ export function InputForm({
           <FormDescription className="flex justify-end pt-6">
             Available Credits: {credits.data}
           </FormDescription>
-          <Button
-            className="mt-4 w-full"
-            type="submit"
-            disabled={generateIcon.isLoading}
-          >
-            {generateIcon.isLoading && <Spinner />}
-            Submit
-          </Button>
+
+          {credits.data && credits.data > 0 ? (
+            <Button
+              className="mt-4 w-full"
+              type="submit"
+              disabled={generateIcon.isLoading}
+            >
+              {generateIcon.isLoading && <Spinner />}
+              Submit
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                buyCredits().catch(console.error);
+              }}
+              type="button"
+              className="mt-4 w-full"
+            >
+              Buy credits
+            </Button>
+          )}
         </div>
       </form>
     </Form>
