@@ -55,8 +55,8 @@ const FormSchema = z.object({
   prompt: z.string({
     required_error: "Prompt is required",
   }),
-  colour: z.string(),
-  style: z.string(),
+  colour: z.string().nonempty("Required"),
+  style: z.string().nonempty("Required"),
   numberOfIcons: z
     .number({
       required_error: "Number is required",
@@ -101,15 +101,13 @@ export function InputForm({
     },
   });
 
+  const credits = api.user.getCredits.useQuery();
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
     generateIcon.mutate(data);
     toast({
-      title: "You submitted the prompt:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+      title: "Submitting the prompt:",
+      description: <p>{data.prompt}</p>,
     });
   }
 
@@ -138,10 +136,15 @@ export function InputForm({
         <FormField
           control={form.control}
           name="colour"
+          defaultValue=""
           render={({ field }) => (
             <FormItem>
               <FormLabel>2. Colour</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="" />
@@ -163,10 +166,15 @@ export function InputForm({
         <FormField
           control={form.control}
           name="style"
+          defaultValue=""
           render={({ field }) => (
             <FormItem>
               <FormLabel>3. Style</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="" />
@@ -208,10 +216,19 @@ export function InputForm({
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={generateIcon.isLoading}>
-          {generateIcon.isLoading && <Spinner />}
-          Submit
-        </Button>
+        <div>
+          <FormDescription className="flex justify-end pt-6">
+            Available Credits: {credits.data}
+          </FormDescription>
+          <Button
+            className="mt-4 w-full"
+            type="submit"
+            disabled={generateIcon.isLoading}
+          >
+            {generateIcon.isLoading && <Spinner />}
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );
