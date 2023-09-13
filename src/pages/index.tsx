@@ -4,10 +4,34 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { InputForm } from "~/components/form";
+import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
+
+export type imageUrls = { imageUrl: string }[];
+
+const GenerateGallery = ({ imageUrls }: { imageUrls: imageUrls }) => {
+  return (
+    <div className="mt-8 min-h-[288px] w-full rounded-lg border bg-gray-50 p-4 sm:p-6 lg:col-span-2 lg:mt-0 lg:min-h-full">
+      {imageUrls.length > 0 && (
+        <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {imageUrls.map((image) => (
+            <Link key={image.imageUrl} href={image.imageUrl} target="_blank">
+              <Image
+                alt="an image of generated prompt"
+                src={image.imageUrl}
+                width={256}
+                height={256}
+                className="rounded-lg border"
+              />
+            </Link>
+          ))}
+        </section>
+      )}
+    </div>
+  );
+};
 
 const HomePage: NextPage = () => {
-  const [imageUrls, setImageUrls] = useState<{ imageUrl: string }[]>([]);
+  const [imageUrls, setImageUrls] = useState<imageUrls>([]);
   const session = useSession();
   const isLoggedIn = !!session.data;
 
@@ -30,29 +54,12 @@ const HomePage: NextPage = () => {
         {isLoggedIn && (
           <div className="mt-8 grid lg:grid-cols-3 lg:gap-6">
             <div className="w-full rounded-lg border p-4 sm:p-6 lg:col-span-1 lg:mr-8">
-              <InputForm setImageUrls={setImageUrls} imageUrls={imageUrls} />
+              <GenerateIconForm
+                setImageUrls={setImageUrls}
+                imageUrls={imageUrls}
+              />
             </div>
-            <div className="mt-8 min-h-[288px] w-full rounded-lg border bg-gray-50 p-4 sm:p-6 lg:col-span-2 lg:mt-0 lg:min-h-full">
-              {imageUrls.length > 0 && (
-                <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {imageUrls.map((image) => (
-                    <Link
-                      key={image.imageUrl}
-                      href={image.imageUrl}
-                      target="_blank"
-                    >
-                      <Image
-                        alt="an image of generated prompt"
-                        src={image.imageUrl}
-                        width={256}
-                        height={256}
-                        className="rounded-lg border"
-                      />
-                    </Link>
-                  ))}
-                </section>
-              )}
-            </div>
+            <GenerateGallery imageUrls={imageUrls} />
           </div>
         )}
       </main>
