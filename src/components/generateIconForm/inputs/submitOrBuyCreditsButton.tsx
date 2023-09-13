@@ -14,10 +14,7 @@ export const SubmitOrBuyCreditsButton = ({
 
   return (
     <>
-      <FormDescription className="flex justify-end pt-6">
-        Available Credits: {credits.data}
-      </FormDescription>
-
+      <FormDescription>Available Credits: {credits.data}</FormDescription>
       {credits.data && credits.data > 0 ? (
         <Button className="mt-4 w-full" type="submit" disabled={isLoading}>
           {isLoading && <Spinner />}

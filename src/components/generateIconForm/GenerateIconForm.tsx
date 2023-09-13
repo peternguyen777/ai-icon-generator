@@ -7,6 +7,7 @@ import { Form } from "~/components/ui/form";
 import { toast } from "~/components/ui/use-toast";
 import type { imageUrls } from "~/pages";
 import { api } from "~/utils/api";
+import { CardContent, CardFooter } from "../ui/card";
 import { ColourSelector } from "./inputs/colourSelector";
 import { NumberOfIconsInput } from "./inputs/numberOfIconsInput";
 import { PromptInput } from "./inputs/promptInput";
@@ -69,15 +70,16 @@ export function GenerateIconForm({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col space-y-6"
-      >
-        <PromptInput />
-        <ColourSelector />
-        <StyleSelector />
-        <NumberOfIconsInput />
-        <SubmitOrBuyCreditsButton isLoading={generateIcon.isLoading} />
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <CardContent className="flex flex-col space-y-6">
+          <PromptInput />
+          <ColourSelector />
+          <StyleSelector />
+          <NumberOfIconsInput />
+        </CardContent>
+        <CardFooter className="flex flex-col items-end">
+          <SubmitOrBuyCreditsButton isLoading={generateIcon.isLoading} />
+        </CardFooter>
       </form>
     </Form>
   );
