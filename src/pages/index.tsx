@@ -1,3 +1,4 @@
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { type NextPage } from "next";
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
@@ -5,33 +6,55 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
-import { Button } from "~/components/ui/button";
+import { Button, buttonVariants } from "~/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 
-export type imageUrls = { imageUrl: string }[];
+export interface GeneratedImage {
+  prompt: string | null;
+  imageUrl: string;
+}
 
-const GenerateGallery = ({ imageUrls }: { imageUrls: imageUrls }) => {
+const GenerateGallery = ({
+  generatedImages,
+}: {
+  generatedImages: GeneratedImage[];
+}) => {
   return (
     <>
-      {imageUrls.length > 0 && (
+      {generatedImages.length > 0 && (
         <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {imageUrls.map((image) => (
-            <Link key={image.imageUrl} href={image.imageUrl} target="_blank">
-              <Image
-                alt="an image of generated prompt"
-                src={image.imageUrl}
-                width={256}
-                height={256}
-                className="rounded-lg border"
-              />
-            </Link>
-          ))}
+          <TooltipProvider>
+            {generatedImages.map((image) => (
+              <Tooltip key={image.imageUrl}>
+                <TooltipTrigger asChild>
+                  <Link href={image.imageUrl} target="_blank">
+                    <Image
+                      alt="an image of generated prompt"
+                      src={image.imageUrl}
+                      width={256}
+                      height={256}
+                      className="rounded-lg border"
+                    />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{image.prompt}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
         </section>
       )}
     </>
@@ -39,7 +62,7 @@ const GenerateGallery = ({ imageUrls }: { imageUrls: imageUrls }) => {
 };
 
 const HomePage: NextPage = () => {
-  const [imageUrls, setImageUrls] = useState<imageUrls>([]);
+  const [generatedImages, setGeneratedImages] = useState<GeneratedImage[]>([]);
   const session = useSession();
   const isLoggedIn = !!session.data;
 
@@ -53,17 +76,6 @@ const HomePage: NextPage = () => {
       <main className="container mx-auto my-8 flex flex-col px-8">
         <div className="grid lg:grid-cols-3 lg:gap-6">
           <Card className="min-h-[288px] w-full lg:col-span-1 lg:mr-8">
-            {isLoggedIn && (
-              <>
-                <CardHeader>
-                  <CardTitle>Generate your icon</CardTitle>
-                </CardHeader>
-                <GenerateIconForm
-                  setImageUrls={setImageUrls}
-                  imageUrls={imageUrls}
-                />
-              </>
-            )}
             {!isLoggedIn && (
               <>
                 <CardHeader>
@@ -75,16 +87,35 @@ const HomePage: NextPage = () => {
                 </CardContent>
               </>
             )}
+            {isLoggedIn && (
+              <>
+                <CardHeader>
+                  <CardTitle>Generate your icon</CardTitle>
+                </CardHeader>
+                <GenerateIconForm
+                  setGeneratedImages={setGeneratedImages}
+                  generatedImages={generatedImages}
+                />
+              </>
+            )}
           </Card>
 
-          <Card className="mt-8 min-h-[288px] w-full bg-gray-50 lg:col-span-2 lg:mt-0 lg:min-h-full">
+          <Card className="relative mt-8 min-h-[288px] w-full bg-gray-50 lg:col-span-2 lg:mt-0 lg:min-h-full">
             <CardHeader>
               <CardTitle>Output</CardTitle>
             </CardHeader>
             <CardContent>
               {/* TODO: Work on this, add a carousel */}
-              <GenerateGallery imageUrls={imageUrls} />
+              <GenerateGallery generatedImages={generatedImages} />
             </CardContent>
+            <CardFooter className="absolute bottom-0 right-0">
+              <Link
+                className={buttonVariants({ variant: "default" })}
+                href="/collection"
+              >
+                My collection
+              </Link>
+            </CardFooter>
           </Card>
         </div>
       </main>

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form } from "~/components/ui/form";
 import { toast } from "~/components/ui/use-toast";
-import type { imageUrls } from "~/pages";
+import type { GeneratedImage } from "~/pages";
 import { api } from "~/utils/api";
 import { CardContent, CardFooter } from "../ui/card";
 import { ColourSelector } from "./inputs/colourSelector";
@@ -33,11 +33,11 @@ const FormSchema = z.object({
 export type InferredFormSchema = z.infer<typeof FormSchema>;
 
 export function GenerateIconForm({
-  setImageUrls,
-  imageUrls,
+  setGeneratedImages,
+  generatedImages,
 }: {
-  setImageUrls: Dispatch<SetStateAction<imageUrls>>;
-  imageUrls: imageUrls;
+  setGeneratedImages: Dispatch<SetStateAction<GeneratedImage[]>>;
+  generatedImages: GeneratedImage[];
 }) {
   const form = useForm<InferredFormSchema>({
     resolver: zodResolver(FormSchema),
@@ -45,7 +45,7 @@ export function GenerateIconForm({
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
-      setImageUrls([...data, ...imageUrls]);
+      setGeneratedImages([...data, ...generatedImages]);
       form.reset();
       toast({
         title: "Success!",
