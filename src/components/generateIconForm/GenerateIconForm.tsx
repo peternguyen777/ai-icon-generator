@@ -13,7 +13,7 @@ import { PromptInput } from "./inputs/promptInput";
 import { StyleSelector } from "./inputs/styleSelector";
 import { SubmitOrBuyCreditsButton } from "./inputs/submitOrBuyCreditsButton";
 
-export const FormSchema = z.object({
+const FormSchema = z.object({
   prompt: z.string({
     required_error: "Prompt is required",
   }),
@@ -60,7 +60,6 @@ export function GenerateIconForm({
   });
 
   function onSubmit(data: InferredFormSchema) {
-    console.log("data:", data);
     generateIcon.mutate(data);
     toast({
       title: "Submitting the prompt:",
