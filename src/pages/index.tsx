@@ -34,7 +34,7 @@ const GenerateGallery = ({
   return (
     <>
       {generatedImages.length > 0 && (
-        <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <TooltipProvider>
             {generatedImages.map((image) => (
               <Tooltip key={image.imageUrl}>
@@ -100,23 +100,27 @@ const HomePage: NextPage = () => {
             )}
           </Card>
 
-          <Card className="relative mt-8 min-h-[288px] w-full bg-gray-50 lg:col-span-2 lg:mt-0 lg:min-h-full">
-            <CardHeader>
-              <CardTitle>Output</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {/* TODO: Work on this, add a carousel */}
-              <GenerateGallery generatedImages={generatedImages} />
-            </CardContent>
-            <CardFooter className="absolute bottom-0 right-0">
-              <Link
-                className={buttonVariants({ variant: "default" })}
-                href="/collection"
-              >
-                My collection
-              </Link>
-            </CardFooter>
-          </Card>
+          {isLoggedIn && (
+            <Card className="mt-8 flex w-full flex-col  bg-gray-50 lg:col-span-2 lg:mt-0">
+              <>
+                <CardHeader>
+                  <CardTitle>Output</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  {/* TODO: Work on this, add a carousel */}
+                  <GenerateGallery generatedImages={generatedImages} />
+                </CardContent>
+              </>
+              <CardFooter className="justify-end">
+                <Link
+                  className={buttonVariants({ variant: "default" })}
+                  href="/collection"
+                >
+                  My collection
+                </Link>
+              </CardFooter>
+            </Card>
+          )}
         </div>
       </main>
     </>

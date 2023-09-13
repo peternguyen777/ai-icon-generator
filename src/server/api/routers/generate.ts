@@ -65,7 +65,7 @@ export const generateRouter = createTRPCRouter({
         });
       }
 
-      const finalPrompt = `a square icon of ${input.colour} color with the prompt: ${input.prompt}. ${input.style} style, high quality, trendy. transparent background.`;
+      const finalPrompt = `An icon in ${input.style} style, with the prompt: ${input.prompt}. ${input.colour} color, High quality, trendy, deviant art style`;
 
       const base64EncodedImages = await generateIcon(
         finalPrompt,
