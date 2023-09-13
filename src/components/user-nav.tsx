@@ -1,4 +1,8 @@
+import type { Session } from "next-auth";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
 import { useBuyCredits } from "~/hooks/useBuyCredits";
+import { api } from "~/utils/api";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
@@ -8,13 +12,8 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import Link from "next/link";
-import { signOut } from "next-auth/react";
-import type { Session } from "next-auth";
-import { api } from "~/utils/api";
 
 export function UserNav({ userData }: { userData: Session }) {
   const { buyCredits } = useBuyCredits();
@@ -54,7 +53,6 @@ export function UserNav({ userData }: { userData: Session }) {
             }}
           >
             Buy credits
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <Link href="/collection">My Collection</Link>
@@ -67,7 +65,6 @@ export function UserNav({ userData }: { userData: Session }) {
           }}
         >
           Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

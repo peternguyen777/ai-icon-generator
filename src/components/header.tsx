@@ -9,18 +9,12 @@ export const Header = () => {
 
   return (
     <nav className="border-b">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between px-8">
         <PrimaryLink href="/" className="text-lg">
           Icon Generator
         </PrimaryLink>
-        <ul className="flex gap-4">
-          <li>
-            <PrimaryLink href="/generate">Generate</PrimaryLink>
-          </li>
-          <li>
-            <PrimaryLink href="/community">Community</PrimaryLink>
-          </li>
-        </ul>
+
+        <PrimaryLink href="/community">Community</PrimaryLink>
 
         <ul className="flex gap-4">
           {isLoggedIn && <UserNav userData={session.data} />}
