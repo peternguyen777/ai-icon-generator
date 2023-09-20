@@ -13,7 +13,7 @@ const CollectionPage: NextPage = () => {
         <meta name="description" content="Your icons" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {icons.data && <Collection title={"Your icons"} icons={icons.data} />}
+      {icons.data && <Collection title={"Your icons"} data={icons.data} />}
     </>
   );
 };

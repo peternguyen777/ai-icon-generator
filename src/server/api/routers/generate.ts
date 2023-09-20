@@ -78,6 +78,8 @@ export const generateRouter = createTRPCRouter({
             data: {
               prompt: input.prompt,
               userId: ctx.session.user.id,
+              colour: input.colour,
+              style: input.style,
             },
           });
 
