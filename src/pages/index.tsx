@@ -101,7 +101,11 @@ const HomePage: NextPage = () => {
           </Card>
 
           {isLoggedIn && (
-            <Card className="mt-8 hidden w-full flex-col  bg-gray-50 lg:col-span-2 lg:mt-0 lg:flex">
+            <Card
+              className={`mt-8 ${
+                generatedImages ? `flex` : `hidden lg:flex`
+              } w-full flex-col  bg-gray-50 lg:col-span-2 lg:mt-0`}
+            >
               <>
                 <CardHeader>
                   <CardTitle>Output</CardTitle>
