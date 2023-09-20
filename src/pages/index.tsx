@@ -5,6 +5,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { DownloadButton } from "~/components/download-button";
 import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
 import { Button, buttonVariants } from "~/components/ui/button";
 import {
@@ -22,6 +23,7 @@ import {
 } from "~/components/ui/tooltip";
 
 export interface GeneratedImage {
+  id: string;
   prompt: string | null;
   imageUrl: string;
 }
@@ -39,15 +41,21 @@ const GenerateGallery = ({
             {generatedImages.map((image) => (
               <Tooltip key={image.imageUrl}>
                 <TooltipTrigger asChild>
-                  <Link href={image.imageUrl} target="_blank">
-                    <Image
-                      alt="an image of generated prompt"
-                      src={image.imageUrl}
-                      width={256}
-                      height={256}
-                      className="rounded-lg border"
+                  <div className="relative">
+                    <DownloadButton
+                      fileName={image.id}
+                      imageUrl={image.imageUrl}
                     />
-                  </Link>
+                    <Link href={image.imageUrl} target="_blank">
+                      <Image
+                        alt="an image of generated prompt"
+                        src={image.imageUrl}
+                        width={256}
+                        height={256}
+                        className="rounded-lg border"
+                      />
+                    </Link>
+                  </div>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>{image.prompt}</p>

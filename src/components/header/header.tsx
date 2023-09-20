@@ -1,6 +1,6 @@
 import { signIn, useSession } from "next-auth/react";
 import { PrimaryLink } from "./primarylink";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { UserNav } from "./user-nav";
 
 export const Header = () => {

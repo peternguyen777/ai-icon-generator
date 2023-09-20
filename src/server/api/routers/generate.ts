@@ -99,8 +99,9 @@ export const generateRouter = createTRPCRouter({
 
       return createdIcons.map((icon) => {
         return {
-          imageUrl: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
+          id: icon.id,
           prompt: icon.prompt,
+          imageUrl: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
         };
       });
     }),
