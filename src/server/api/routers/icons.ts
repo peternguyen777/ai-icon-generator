@@ -13,6 +13,14 @@ export const iconsRouter = createTRPCRouter({
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        User: {
+          select: {
+            image: true,
+            name: true,
+          },
+        },
+      },
     });
 
     return icons;
@@ -22,6 +30,14 @@ export const iconsRouter = createTRPCRouter({
       take: 50,
       orderBy: {
         createdAt: "desc",
+      },
+      include: {
+        User: {
+          select: {
+            image: true,
+            name: true,
+          },
+        },
       },
     });
 
