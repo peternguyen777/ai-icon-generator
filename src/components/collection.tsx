@@ -19,11 +19,11 @@ export const Collection = ({ title, data }: CollectionProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <main className="container mx-auto my-12 flex min-h-screen flex-col px-8">
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+    <main className="container mx-auto my-8 flex min-h-screen flex-col px-4 sm:my-12 sm:px-8">
+      <h1 className="scroll-m-20 font-clash text-2xl font-medium tracking-tight lg:text-4xl">
         {title}
       </h1>
-      <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
+      <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-12 sm:grid-cols-4 md:grid-cols-6">
         {data.map((icon, index) => {
           const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
           return (

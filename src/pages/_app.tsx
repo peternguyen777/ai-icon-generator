@@ -6,6 +6,12 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/toaster";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";
+import localFont from "next/font/local";
+
+const clash = localFont({
+  src: "../fonts/ClashDisplay-Variable.ttf",
+  variable: "--font-clash",
+});
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -19,9 +25,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
       disableTransitionOnChange
     >
       <SessionProvider session={session}>
-        <Header />
-        <Toaster />
-        <Component {...pageProps} />
+        <main className={`${clash.variable}`}>
+          <Header />
+          <Toaster />
+          <Component {...pageProps} />
+        </main>
       </SessionProvider>
     </ThemeProvider>
   );
