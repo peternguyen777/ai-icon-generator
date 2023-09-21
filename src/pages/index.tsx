@@ -145,6 +145,18 @@ const HomePage: NextPage = () => {
                       </span>
                     </div>
                   </CardContent>
+                ) : generatedImages.length === 0 ? (
+                  <CardContent className="flex flex-grow flex-col items-center justify-center">
+                    <Image
+                      src="/emptygallery.png"
+                      alt="empty gallery"
+                      width={128}
+                      height={128}
+                    />
+                    <span className="mt-6 font-clash text-xl font-semibold">
+                      Enter a prompt to start generating...
+                    </span>
+                  </CardContent>
                 ) : (
                   <ScrollArea className="h-[656px] pb-8">
                     <CardContent className="flex-grow">
