@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { Collection } from "~/components/collection";
-import { PaginationBar } from "~/components/pagination-bar";
+import { Collection } from "~/components/imagePreview/collection";
+import { PaginationBar } from "~/components/imagePreview/pagination-bar";
 import { api } from "~/utils/api";
 
 const PAGE_SIZE = 48;

@@ -1,13 +1,14 @@
 import { type NextPage } from "next";
 import { signIn, useSession } from "next-auth/react";
+import { useTheme } from "next-themes";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { DownloadButton } from "~/components/download-button";
 import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
 import { Spinner } from "~/components/icons/spinner";
-import { DialogContentImage } from "~/components/imageDialog/image-dialog";
+import { DownloadButton } from "~/components/imagePreview/download-button";
+import { DialogContentImage } from "~/components/imagePreview/image-dialog";
 import { Button, buttonVariants } from "~/components/ui/button";
 import {
   Card,
@@ -75,6 +76,8 @@ const HomePage: NextPage = () => {
   const session = useSession();
   const isLoggedIn = !!session.data;
 
+  const { resolvedTheme } = useTheme();
+
   return (
     <>
       <Head>
@@ -136,10 +139,14 @@ const HomePage: NextPage = () => {
                 ) : generatedImages.length === 0 ? (
                   <CardContent className="flex flex-grow flex-col items-center justify-center">
                     <Image
-                      src="/emptygallery.png"
+                      src={
+                        resolvedTheme === "light"
+                          ? `/emptygallery-light.png`
+                          : `/emptygallery-dark.png`
+                      }
                       alt="empty gallery"
-                      width={128}
-                      height={128}
+                      width={192}
+                      height={192}
                     />
                     <span className="mt-6 font-clash text-xl font-semibold">
                       Enter a prompt to start generating...

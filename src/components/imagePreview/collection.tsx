@@ -2,8 +2,8 @@ import Image from "next/image";
 import { useState } from "react";
 import type { GeneratedImages } from "~/pages";
 import { DownloadButton } from "./download-button";
-import { DialogContentImage } from "./imageDialog/image-dialog";
-import { Dialog, DialogTrigger } from "./ui/dialog";
+import { DialogContentImage } from "./image-dialog";
+import { Dialog, DialogTrigger } from "../ui/dialog";
 
 const BUCKET_NAME = "ai-icon-generator2";
 
@@ -31,7 +31,11 @@ export const Collection = ({ data }: { data: GeneratedImages }) => {
                   className="w-full cursor-pointer rounded-lg"
                   height="128"
                   width="128"
-                  alt={icon.prompt ?? "an image of an icon"}
+                  alt={
+                    icon.breed && icon.prompt
+                      ? `A ${icon.breed} dog ${icon.prompt}`
+                      : `A dog icon`
+                  }
                 />
               </DialogTrigger>
               <DialogContentImage icon={icon} imageUrl={imageUrl} />

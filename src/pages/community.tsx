@@ -1,10 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { Collection } from "~/components/collection";
+import { Collection } from "~/components/imagePreview/collection";
 import { api } from "~/utils/api";
 import { getTotalPages } from "./collection";
-import { PaginationBar } from "~/components/pagination-bar";
+import { PaginationBar } from "~/components/imagePreview/pagination-bar";
 
 const CommunityPage: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
