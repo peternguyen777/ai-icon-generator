@@ -66,7 +66,7 @@ export const BreedSelector = () => {
               </ScrollArea>
             </SelectContent>
           </Select>
-          <FormDescription>Pick your dog breed</FormDescription>
+          <FormDescription>Pick your 🐶</FormDescription>
           <FormMessage />
         </FormItem>
       )}

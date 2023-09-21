@@ -13,6 +13,7 @@ export const Collection = ({ data }: { data: GeneratedImages }) => {
   return (
     <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-12 sm:grid-cols-4 md:grid-cols-6">
       {data.map((icon, index) => {
+        const fileName = `${icon.breed} ${icon.prompt}`;
         const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
         return (
           <div
@@ -22,7 +23,7 @@ export const Collection = ({ data }: { data: GeneratedImages }) => {
             key={icon.id}
           >
             {hoveredIndex === index && (
-              <DownloadButton fileName={icon.id} imageUrl={imageUrl} />
+              <DownloadButton fileName={fileName} imageUrl={imageUrl} />
             )}
             <Dialog>
               <DialogTrigger asChild>

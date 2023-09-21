@@ -34,6 +34,7 @@ export const DialogContentImage = ({
   icon,
   imageUrl,
 }: DialogContentImageProps) => {
+  const fileName = `${icon.breed} ${icon.prompt}`;
   return (
     <DialogContent className="rounded-lg p-4 sm:p-6">
       {icon.User?.name && (
@@ -44,7 +45,7 @@ export const DialogContentImage = ({
         </DialogHeader>
       )}
       <div className="relative">
-        <DownloadButton fileName={icon.id} imageUrl={imageUrl} />
+        <DownloadButton fileName={fileName} imageUrl={imageUrl} />
         <Image
           src={imageUrl}
           alt="your icon"
