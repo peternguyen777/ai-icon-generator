@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form } from "~/components/ui/form";
 import { toast } from "~/components/ui/use-toast";
-import type { GeneratedImage } from "~/pages";
+import type { GeneratedImages } from "~/pages";
 import { api } from "~/utils/api";
 import { CardContent, CardFooter } from "../ui/card";
 import { ColourSelector } from "./inputs/colourSelector";
@@ -39,8 +39,8 @@ export function GenerateIconForm({
   generatedImages,
   setIsGenerating,
 }: {
-  setGeneratedImages: Dispatch<SetStateAction<GeneratedImage[]>>;
-  generatedImages: GeneratedImage[];
+  setGeneratedImages: Dispatch<SetStateAction<GeneratedImages>>;
+  generatedImages: GeneratedImages;
   setIsGenerating: Dispatch<SetStateAction<boolean>>;
 }) {
   const form = useForm<InferredFormSchema>({
