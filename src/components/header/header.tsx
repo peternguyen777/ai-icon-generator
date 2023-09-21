@@ -2,6 +2,7 @@ import { signIn, useSession } from "next-auth/react";
 import { PrimaryLink } from "./primarylink";
 import { Button } from "../ui/button";
 import { UserNav } from "./user-nav";
+import { ModeToggle } from "./mode-toggle";
 
 export const Header = () => {
   const session = useSession();
@@ -16,7 +17,8 @@ export const Header = () => {
 
         <PrimaryLink href="/community">Community</PrimaryLink>
 
-        <ul className="flex gap-4">
+        <ul className="flex items-center gap-4">
+          <ModeToggle />
           {isLoggedIn && <UserNav userData={session.data} />}
           {!isLoggedIn && (
             <li>
