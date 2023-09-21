@@ -1,5 +1,5 @@
 import type { Session } from "next-auth";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { api } from "~/utils/api";
@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-export function UserNav({ userData }: { userData: Session }) {
+export function UserNavLoggedIn({ userData }: { userData: Session }) {
   const { buyCredits } = useBuyCredits();
 
   const credits = api.user.getCredits.useQuery();
@@ -44,7 +44,6 @@ export function UserNav({ userData }: { userData: Session }) {
             {credits.data} Credits remaining
           </p>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="cursor-pointer"
@@ -54,8 +53,12 @@ export function UserNav({ userData }: { userData: Session }) {
           >
             Buy credits
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer">
-            <Link href="/collection">My Collection</Link>
+            <Link href="/collection">My icons</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">
+            <Link href="/community">Community icons</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
@@ -63,9 +66,39 @@ export function UserNav({ userData }: { userData: Session }) {
           onClick={() => {
             signOut().catch(console.error);
           }}
+          className="cursor-pointer"
         >
           Log out
         </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+export function UserNavLoggedOut() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="/02.png" alt="login" />
+            <AvatarFallback>PN</AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuItem
+          onClick={() => void signIn("google")}
+          className="cursor-pointer"
+        >
+          Login with Google
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem className="cursor-pointer">
+            <Link href="/community">Community icons</Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
