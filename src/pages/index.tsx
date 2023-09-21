@@ -23,17 +23,16 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import type { RouterOutputs } from "~/utils/api";
 
-export interface GeneratedImage {
-  id: string;
-  prompt: string | undefined;
-  imageUrl: string;
-}
+type GeneratedImages = RouterOutputs["generate"]["generateIcon"];
+
+const BUCKET_NAME = "ai-icon-generator2";
 
 const GenerateGallery = ({
   generatedImages,
 }: {
-  generatedImages: GeneratedImage[];
+  generatedImages: GeneratedImages;
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -42,9 +41,10 @@ const GenerateGallery = ({
       {generatedImages.length > 0 && (
         <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <TooltipProvider>
-            {generatedImages.map((image, index) => {
+            {generatedImages.map((icon, index) => {
+              const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
               return (
-                <Tooltip key={image.imageUrl}>
+                <Tooltip key={imageUrl}>
                   <TooltipTrigger asChild>
                     <div
                       className="relative"
@@ -53,23 +53,23 @@ const GenerateGallery = ({
                     >
                       {hoveredIndex === index && (
                         <DownloadButton
-                          fileName={image.id}
-                          imageUrl={image.imageUrl}
+                          fileName={icon.id}
+                          imageUrl={imageUrl}
                         />
                       )}
-                      <Link href={image.imageUrl} target="_blank">
-                        <Image
-                          alt="an image of generated prompt"
-                          src={image.imageUrl}
-                          width={256}
-                          height={256}
-                          className="rounded-lg border"
-                        />
-                      </Link>
+                      <Image
+                        alt="an image of generated prompt"
+                        src={imageUrl}
+                        width={256}
+                        height={256}
+                        className="rounded-lg border"
+                      />
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{image.prompt}</p>
+                    <p>
+                      A {icon.breed} {icon.prompt}
+                    </p>
                   </TooltipContent>
                 </Tooltip>
               );
@@ -82,7 +82,7 @@ const GenerateGallery = ({
 };
 
 const HomePage: NextPage = () => {
-  const [generatedImages, setGeneratedImages] = useState<GeneratedImage[]>([]);
+  const [generatedImages, setGeneratedImages] = useState<GeneratedImages>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const session = useSession();
   const isLoggedIn = !!session.data;
