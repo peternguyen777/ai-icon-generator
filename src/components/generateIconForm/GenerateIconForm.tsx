@@ -37,9 +37,11 @@ export type InferredFormSchema = z.infer<typeof FormSchema>;
 export function GenerateIconForm({
   setGeneratedImages,
   generatedImages,
+  setIsGenerating,
 }: {
   setGeneratedImages: Dispatch<SetStateAction<GeneratedImage[]>>;
   generatedImages: GeneratedImage[];
+  setIsGenerating: Dispatch<SetStateAction<boolean>>;
 }) {
   const form = useForm<InferredFormSchema>({
     resolver: zodResolver(FormSchema),
@@ -48,6 +50,7 @@ export function GenerateIconForm({
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
       setGeneratedImages([...data, ...generatedImages]);
+
       form.reset();
       toast({
         title: "Success!",
@@ -60,10 +63,14 @@ export function GenerateIconForm({
         description: <p>{error.message}</p>,
       });
     },
+    onSettled: () => {
+      setIsGenerating(false);
+    },
   });
 
   function onSubmit(data: InferredFormSchema) {
     generateIcon.mutate(data);
+    setIsGenerating(true);
     toast({
       title: "Submitting the prompt:",
       description: <p>{`A ${data.breed} ${data.prompt}`}</p>,

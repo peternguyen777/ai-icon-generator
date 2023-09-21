@@ -13,25 +13,39 @@ const clash = localFont({
   variable: "--font-clash",
 });
 
+const archivo = localFont({
+  src: "../fonts/Archivo-Variable.ttf",
+  variable: "--font-archivo",
+});
+
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <SessionProvider session={session}>
-        <main className={`${clash.variable}`}>
-          <Header />
-          <Toaster />
-          <Component {...pageProps} />
-        </main>
-      </SessionProvider>
-    </ThemeProvider>
+    <>
+      <style jsx global>
+        {`
+          html {
+            font-family: ${archivo.style.fontFamily};
+          }
+        `}
+      </style>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <SessionProvider session={session}>
+          <main className={`${clash.variable}`}>
+            <Header />
+            <Toaster />
+            <Component {...pageProps} />
+          </main>
+        </SessionProvider>
+      </ThemeProvider>
+    </>
   );
 };
 

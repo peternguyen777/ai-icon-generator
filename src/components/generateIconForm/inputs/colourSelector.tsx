@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "../../ui/select";
 import type { InferredFormSchema } from "../GenerateIconForm";
+import { ScrollArea } from "~/components/ui/scroll-area";
 
 const COLOURS = [
   "Blue",
@@ -49,11 +50,13 @@ export const ColourSelector = () => {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {COLOURS.map((colour) => (
-                <SelectItem key={colour} value={colour.toLowerCase()}>
-                  {colour}
-                </SelectItem>
-              ))}
+              <ScrollArea className="h-[240px]">
+                {COLOURS.map((colour) => (
+                  <SelectItem key={colour} value={colour.toLowerCase()}>
+                    {colour}
+                  </SelectItem>
+                ))}
+              </ScrollArea>
             </SelectContent>
           </Select>
           <FormDescription>Pick your icon colour</FormDescription>

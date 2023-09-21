@@ -15,17 +15,22 @@ import {
   SelectValue,
 } from "../../ui/select";
 import { type InferredFormSchema } from "../GenerateIconForm";
+import { ScrollArea } from "~/components/ui/scroll-area";
 
 const STYLES = [
-  "Claymorphic",
   "3d Rendered",
-  "Pixelated",
-  "Watercolor",
-  "Geometric",
+  "Anime",
+  "Charcoal",
   "Collage",
-  "Vector artwork",
+  "Cyberpunk",
+  "Impressionist",
+  "Minimalism",
+  "Pencil Sketch",
+  "Sticker",
+  "Steampunk",
+  "Vector",
   "Vintage",
-  "Surrealistic",
+  "Watercolor",
 ];
 
 export const StyleSelector = () => {
@@ -50,11 +55,13 @@ export const StyleSelector = () => {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {STYLES.map((style) => (
-                <SelectItem key={style} value={style.toLowerCase()}>
-                  {style}
-                </SelectItem>
-              ))}
+              <ScrollArea className="h-[240px]">
+                {STYLES.map((style) => (
+                  <SelectItem key={style} value={style.toLowerCase()}>
+                    {style}
+                  </SelectItem>
+                ))}
+              </ScrollArea>
             </SelectContent>
           </Select>
           <FormDescription>Pick your icon style</FormDescription>

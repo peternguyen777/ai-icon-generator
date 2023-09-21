@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { DownloadButton } from "~/components/download-button";
 import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
+import { Spinner } from "~/components/icons/spinner";
 import { Button, buttonVariants } from "~/components/ui/button";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { ScrollArea } from "~/components/ui/scroll-area";
 import {
   Tooltip,
   TooltipContent,
@@ -81,6 +83,7 @@ const GenerateGallery = ({
 
 const HomePage: NextPage = () => {
   const [generatedImages, setGeneratedImages] = useState<GeneratedImage[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
   const session = useSession();
   const isLoggedIn = !!session.data;
 
@@ -97,7 +100,9 @@ const HomePage: NextPage = () => {
             {!isLoggedIn && (
               <>
                 <CardHeader>
-                  <CardTitle>Generate an icon 🐶</CardTitle>
+                  <CardTitle className="font-clash">
+                    Generate an icon 🐶
+                  </CardTitle>
                   <CardDescription>Login to begin prompting</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -108,11 +113,14 @@ const HomePage: NextPage = () => {
             {isLoggedIn && (
               <>
                 <CardHeader>
-                  <CardTitle>Generate an icon 🐶</CardTitle>
+                  <CardTitle className="font-clash">
+                    Generate an icon 🐶
+                  </CardTitle>
                 </CardHeader>
                 <GenerateIconForm
                   setGeneratedImages={setGeneratedImages}
                   generatedImages={generatedImages}
+                  setIsGenerating={setIsGenerating}
                 />
               </>
             )}
@@ -126,13 +134,38 @@ const HomePage: NextPage = () => {
             >
               <>
                 <CardHeader>
-                  <CardTitle>Output</CardTitle>
+                  <CardTitle className="font-clash">Output</CardTitle>
                 </CardHeader>
-                <CardContent className="flex-grow">
-                  <GenerateGallery generatedImages={generatedImages} />
-                </CardContent>
+                {isGenerating && generatedImages.length === 0 ? (
+                  <CardContent className="flex flex-grow flex-col items-center justify-center">
+                    <div className="flex">
+                      <Spinner />
+                      <span className="font-clash text-xl font-semibold">
+                        Please wait...
+                      </span>
+                    </div>
+                  </CardContent>
+                ) : generatedImages.length === 0 ? (
+                  <CardContent className="flex flex-grow flex-col items-center justify-center">
+                    <Image
+                      src="/emptygallery.png"
+                      alt="empty gallery"
+                      width={128}
+                      height={128}
+                    />
+                    <span className="mt-6 font-clash text-xl font-semibold">
+                      Enter a prompt to start generating...
+                    </span>
+                  </CardContent>
+                ) : (
+                  <ScrollArea className="h-[656px] pb-8">
+                    <CardContent className="flex-grow">
+                      <GenerateGallery generatedImages={generatedImages} />
+                    </CardContent>
+                  </ScrollArea>
+                )}
               </>
-              <CardFooter className="justify-end">
+              <CardFooter className=" justify-end">
                 <Link
                   className={buttonVariants({ variant: "default" })}
                   href="/collection"

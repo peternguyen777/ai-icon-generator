@@ -1,9 +1,8 @@
-import { signIn, useSession } from "next-auth/react";
-import { PrimaryLink } from "./primarylink";
-import { Button } from "../ui/button";
-import { UserNav } from "./user-nav";
-import { ModeToggle } from "./mode-toggle";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { ModeToggle } from "./mode-toggle";
+import { PrimaryLink } from "./primarylink";
+import { UserNavLoggedIn, UserNavLoggedOut } from "./user-nav";
 
 export const Header = () => {
   const session = useSession();
@@ -20,18 +19,16 @@ export const Header = () => {
             height={30}
           />
           <h1 className="hidden font-clash text-2xl font-semibold leading-none sm:flex lg:text-3xl">
-            Woofr.ai
+            WoofAI
           </h1>
         </PrimaryLink>
 
         <div className="flex items-center gap-4">
-          <PrimaryLink href="/community" className="text-lg">
-            Community
-          </PrimaryLink>
           <ModeToggle />
-          {isLoggedIn && <UserNav userData={session.data} />}
-          {!isLoggedIn && (
-            <Button onClick={() => void signIn("google")}>Login</Button>
+          {isLoggedIn ? (
+            <UserNavLoggedIn userData={session.data} />
+          ) : (
+            <UserNavLoggedOut />
           )}
         </div>
       </div>
