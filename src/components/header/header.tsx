@@ -18,7 +18,7 @@ export const Header = () => {
             width={30}
             height={30}
           />
-          <h1 className="hidden font-clash text-2xl font-semibold leading-none sm:flex lg:text-3xl">
+          <h1 className="font-clash text-2xl font-semibold leading-none  lg:text-3xl">
             WoofAI
           </h1>
         </PrimaryLink>
