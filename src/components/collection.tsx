@@ -60,6 +60,9 @@ export const Collection = ({ title, data }: CollectionProps) => {
                         {icon.User.name}
                       </h4>
                     )}
+                    {icon.breed && (
+                      <p className="text-sm">Breed: {icon.breed}</p>
+                    )}
                     {icon.prompt && (
                       <p className="text-sm">Prompt: {icon.prompt}</p>
                     )}

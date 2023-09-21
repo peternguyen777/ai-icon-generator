@@ -24,7 +24,7 @@ import {
 
 export interface GeneratedImage {
   id: string;
-  prompt: string | null;
+  prompt: string | undefined;
   imageUrl: string;
 }
 
@@ -97,7 +97,7 @@ const HomePage: NextPage = () => {
             {!isLoggedIn && (
               <>
                 <CardHeader>
-                  <CardTitle>Generate your icon</CardTitle>
+                  <CardTitle>Generate an icon 🐶</CardTitle>
                   <CardDescription>Login to begin prompting</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -108,7 +108,7 @@ const HomePage: NextPage = () => {
             {isLoggedIn && (
               <>
                 <CardHeader>
-                  <CardTitle>Generate your icon</CardTitle>
+                  <CardTitle>Generate an icon 🐶</CardTitle>
                 </CardHeader>
                 <GenerateIconForm
                   setGeneratedImages={setGeneratedImages}
@@ -121,7 +121,7 @@ const HomePage: NextPage = () => {
           {isLoggedIn && (
             <Card
               className={`mt-8 ${
-                generatedImages ? `flex` : `hidden lg:flex`
+                generatedImages.length > 0 ? `flex` : `hidden lg:flex`
               } w-full flex-col lg:col-span-2 lg:mt-0`}
             >
               <>
@@ -129,7 +129,6 @@ const HomePage: NextPage = () => {
                   <CardTitle>Output</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  {/* TODO: Work on this, add a carousel */}
                   <GenerateGallery generatedImages={generatedImages} />
                 </CardContent>
               </>

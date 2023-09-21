@@ -16,28 +16,28 @@ import {
 } from "../../ui/select";
 import type { InferredFormSchema } from "../GenerateIconForm";
 
-const COLOURS = [
-  "Blue",
-  "Red",
-  "Pink",
-  "Green",
-  "Orange",
-  "Yellow",
-  "White",
-  "Black",
+const BREEDS = [
+  "Beagle",
+  "Corgi",
+  "Dachshund",
+  "French Bulldog",
+  "German Shepherd",
+  "Poodle",
+  "Samoyed",
+  "Shiba Inu",
 ];
 
-export const ColourSelector = () => {
+export const BreedSelector = () => {
   const form = useFormContext<InferredFormSchema>();
 
   return (
     <FormField
       control={form.control}
-      name="colour"
+      name="breed"
       defaultValue=""
       render={({ field }) => (
         <FormItem>
-          <FormLabel>4. Colour</FormLabel>
+          <FormLabel>1. Dog Breed</FormLabel>
           <Select
             onValueChange={field.onChange}
             defaultValue={field.value}
@@ -49,14 +49,14 @@ export const ColourSelector = () => {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {COLOURS.map((colour) => (
-                <SelectItem key={colour} value={colour.toLowerCase()}>
-                  {colour}
+              {BREEDS.map((breed) => (
+                <SelectItem key={breed} value={breed.toLowerCase()}>
+                  {breed}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <FormDescription>Pick your icon colour</FormDescription>
+          <FormDescription>Pick your dog breed</FormDescription>
           <FormMessage />
         </FormItem>
       )}

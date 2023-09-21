@@ -19,13 +19,11 @@ export const PromptInput = () => {
       name="prompt"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>1. Prompt</FormLabel>
+          <FormLabel>2. What is it doing?</FormLabel>
           <FormControl>
-            <Input placeholder="Shiba inu eating a pizza" {...field} />
+            <Input placeholder="eating a pizza" {...field} />
           </FormControl>
-          <FormDescription>
-            Describe what you want your icon to look like
-          </FormDescription>
+          <FormDescription>Describe an action</FormDescription>
           <FormMessage />
         </FormItem>
       )}

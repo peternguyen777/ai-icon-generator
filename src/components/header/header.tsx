@@ -20,7 +20,7 @@ export const Header = () => {
             height={30}
           />
           <h1 className="hidden font-clash text-2xl font-semibold leading-none sm:flex lg:text-3xl">
-            Woofr
+            Woofr.ai
           </h1>
         </PrimaryLink>
 

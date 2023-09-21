@@ -62,6 +62,7 @@ model User {
 model Icon {
     id            String    @id @default(cuid())
     prompt        String?
+    breed         String?
     colour        String?
     style         String?
     User          User?     @relation(fields:[userId], references: [id])
