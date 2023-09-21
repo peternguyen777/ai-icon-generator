@@ -1,14 +1,14 @@
 import { ChevronRightSquare, Palette, PawPrint, PenTool } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
-import type { IconData } from "../collection";
-import { DownloadButton } from "../download-button";
+import { capitalizeString } from "~/lib/utils";
+import type { GeneratedImages } from "~/pages";
+import { DownloadButton } from "./download-button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { capitalizeString } from "~/lib/utils";
 
 interface DialogContentImageProps {
-  icon: IconData[number];
+  icon: GeneratedImages[number];
   imageUrl: string;
 }
 
@@ -34,9 +34,10 @@ export const DialogContentImage = ({
   icon,
   imageUrl,
 }: DialogContentImageProps) => {
+  const fileName = `${icon.breed} ${icon.prompt}`;
   return (
     <DialogContent className="rounded-lg p-4 sm:p-6">
-      {icon.breed && icon.User?.name && (
+      {icon.User?.name && (
         <DialogHeader>
           <DialogTitle>{`${icon.User.name}'s ${capitalizeString(
             icon.breed
@@ -44,7 +45,7 @@ export const DialogContentImage = ({
         </DialogHeader>
       )}
       <div className="relative">
-        <DownloadButton fileName={icon.id} imageUrl={imageUrl} />
+        <DownloadButton fileName={fileName} imageUrl={imageUrl} />
         <Image
           src={imageUrl}
           alt="your icon"
@@ -54,36 +55,28 @@ export const DialogContentImage = ({
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        {icon.breed && (
-          <AttributeCard
-            title={"Dog Breed"}
-            content={icon.breed}
-            icon={<PawPrint className="h-4 w-4 text-muted-foreground" />}
-          />
-        )}
-        {icon.prompt && (
-          <AttributeCard
-            title={"Prompt"}
-            content={icon.prompt}
-            icon={
-              <ChevronRightSquare className="h-4 w-4 text-muted-foreground" />
-            }
-          />
-        )}
-        {icon.style && (
-          <AttributeCard
-            title={"Style"}
-            content={icon.style}
-            icon={<PenTool className="h-4 w-4 text-muted-foreground" />}
-          />
-        )}
-        {icon.colour && (
-          <AttributeCard
-            title={"Colour"}
-            content={icon.colour}
-            icon={<Palette className="h-4 w-4 text-muted-foreground" />}
-          />
-        )}
+        <AttributeCard
+          title={"Dog Breed"}
+          content={icon.breed}
+          icon={<PawPrint className="h-4 w-4 text-muted-foreground" />}
+        />
+        <AttributeCard
+          title={"Prompt"}
+          content={icon.prompt}
+          icon={
+            <ChevronRightSquare className="h-4 w-4 text-muted-foreground" />
+          }
+        />
+        <AttributeCard
+          title={"Style"}
+          content={icon.style}
+          icon={<PenTool className="h-4 w-4 text-muted-foreground" />}
+        />
+        <AttributeCard
+          title={"Colour"}
+          content={icon.colour}
+          icon={<Palette className="h-4 w-4 text-muted-foreground" />}
+        />
       </div>
     </DialogContent>
   );

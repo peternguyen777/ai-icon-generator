@@ -83,6 +83,14 @@ export const generateRouter = createTRPCRouter({
               colour: input.colour,
               style: input.style,
             },
+            include: {
+              User: {
+                select: {
+                  image: true,
+                  name: true,
+                },
+              },
+            },
           });
 
           await s3
@@ -99,16 +107,6 @@ export const generateRouter = createTRPCRouter({
         })
       );
 
-      return createdIcons.map((icon) => {
-        return {
-          id: icon.id,
-          prompt:
-            icon.breed && icon.prompt
-              ? // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                `A ${icon.breed} ${icon.prompt}`
-              : undefined,
-          imageUrl: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
-        };
-      });
+      return createdIcons.map((icon) => icon);
     }),
 });

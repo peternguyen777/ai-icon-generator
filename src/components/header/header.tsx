@@ -22,7 +22,6 @@ export const Header = () => {
             WoofAI
           </h1>
         </PrimaryLink>
-
         <div className="flex items-center gap-4">
           <ModeToggle />
           {isLoggedIn ? (
