@@ -24,6 +24,7 @@ const config = {
     domains: [
       "oaidalleapiprodscus.blob.core.windows.net",
       "ai-icon-generator2.s3.ap-southeast-2.amazonaws.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };

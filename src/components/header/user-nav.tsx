@@ -14,8 +14,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { useRouter } from "next/router";
 
 export function UserNavLoggedIn({ userData }: { userData: Session }) {
+  const router = useRouter();
   const { buyCredits } = useBuyCredits();
 
   const credits = api.user.getCredits.useQuery();
@@ -55,6 +57,9 @@ export function UserNavLoggedIn({ userData }: { userData: Session }) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer">
+            <Link href="/">Generate</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">
             <Link href="/collection">My icons</Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
@@ -65,6 +70,7 @@ export function UserNavLoggedIn({ userData }: { userData: Session }) {
         <DropdownMenuItem
           onClick={() => {
             signOut().catch(console.error);
+            void router.push("/");
           }}
           className="cursor-pointer"
         >

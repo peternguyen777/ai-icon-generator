@@ -1,4 +1,5 @@
 import { Download } from "lucide-react";
+import { convertToCamelCase } from "~/lib/utils";
 
 interface DownloadButtonProps {
   fileName: string;
@@ -28,7 +29,8 @@ export const DownloadButton = ({ fileName, imageUrl }: DownloadButtonProps) => {
           .then((response) => response.blob())
           .then((blob) => {
             const blobUrl = window.URL.createObjectURL(blob);
-            forceDownload(blobUrl, `${fileName}.png`);
+            const fileNameCamelCase = convertToCamelCase(fileName);
+            forceDownload(blobUrl, `${fileNameCamelCase}.png`);
           })
           .catch((e) => console.error(e));
       }}
