@@ -15,14 +15,22 @@ import {
   SelectValue,
 } from "../../ui/select";
 import type { InferredFormSchema } from "../GenerateIconForm";
+import { ScrollArea } from "~/components/ui/scroll-area";
 
 const BREEDS = [
   "Beagle",
+  "Chow Chow",
   "Corgi",
   "Dachshund",
   "French Bulldog",
   "German Shepherd",
+  "Golden Retriever",
+  "Greyhound",
+  "Groodle",
+  "Labrador",
   "Poodle",
+  "Pomeranian",
+  "Pug",
   "Samoyed",
   "Shiba Inu",
 ];
@@ -49,11 +57,13 @@ export const BreedSelector = () => {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {BREEDS.map((breed) => (
-                <SelectItem key={breed} value={breed.toLowerCase()}>
-                  {breed}
-                </SelectItem>
-              ))}
+              <ScrollArea className="h-[240px]">
+                {BREEDS.map((breed) => (
+                  <SelectItem key={breed} value={breed.toLowerCase()}>
+                    {breed}
+                  </SelectItem>
+                ))}
+              </ScrollArea>
             </SelectContent>
           </Select>
           <FormDescription>Pick your dog breed</FormDescription>
