@@ -35,7 +35,7 @@ export const DialogContentImage = ({
   imageUrl,
 }: DialogContentImageProps) => {
   return (
-    <DialogContent>
+    <DialogContent className="rounded-lg p-4 sm:p-6">
       {icon.breed && icon.User?.name && (
         <DialogHeader>
           <DialogTitle>{`${icon.User.name}'s ${capitalizeString(
