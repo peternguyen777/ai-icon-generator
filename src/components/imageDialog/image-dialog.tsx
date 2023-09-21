@@ -1,14 +1,14 @@
 import { ChevronRightSquare, Palette, PawPrint, PenTool } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
-import type { IconData } from "../collection";
+import { capitalizeString } from "~/lib/utils";
+import type { GeneratedImages } from "~/pages";
 import { DownloadButton } from "../download-button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { capitalizeString } from "~/lib/utils";
 
 interface DialogContentImageProps {
-  icon: IconData[number];
+  icon: GeneratedImages[number];
   imageUrl: string;
 }
 

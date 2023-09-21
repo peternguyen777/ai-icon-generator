@@ -83,6 +83,14 @@ export const generateRouter = createTRPCRouter({
               colour: input.colour,
               style: input.style,
             },
+            include: {
+              User: {
+                select: {
+                  image: true,
+                  name: true,
+                },
+              },
+            },
           });
 
           await s3
@@ -99,14 +107,6 @@ export const generateRouter = createTRPCRouter({
         })
       );
 
-      return createdIcons.map((icon) => {
-        return {
-          ...icon,
-          User: {
-            image: ctx.session.user.image,
-            name: ctx.session.user.name,
-          },
-        };
-      });
+      return createdIcons.map((icon) => icon);
     }),
 });

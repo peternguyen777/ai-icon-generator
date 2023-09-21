@@ -1,4 +1,3 @@
-import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { type NextPage } from "next";
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
@@ -8,6 +7,7 @@ import { useState } from "react";
 import { DownloadButton } from "~/components/download-button";
 import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
 import { Spinner } from "~/components/icons/spinner";
+import { DialogContentImage } from "~/components/imageDialog/image-dialog";
 import { Button, buttonVariants } from "~/components/ui/button";
 import {
   Card,
@@ -17,15 +17,11 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import { ScrollArea } from "~/components/ui/scroll-area";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "~/components/ui/tooltip";
 import type { RouterOutputs } from "~/utils/api";
 
-type GeneratedImages = RouterOutputs["generate"]["generateIcon"];
+export type GeneratedImages = RouterOutputs["generate"]["generateIcon"];
 
 const BUCKET_NAME = "ai-icon-generator2";
 
@@ -40,41 +36,33 @@ const GenerateGallery = ({
     <>
       {generatedImages.length > 0 && (
         <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <TooltipProvider>
-            {generatedImages.map((icon, index) => {
-              const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
-              return (
-                <Tooltip key={imageUrl}>
-                  <TooltipTrigger asChild>
-                    <div
-                      className="relative"
-                      onMouseOver={() => setHoveredIndex(index)}
-                      onMouseOut={() => setHoveredIndex(null)}
-                    >
-                      {hoveredIndex === index && (
-                        <DownloadButton
-                          fileName={icon.id}
-                          imageUrl={imageUrl}
-                        />
-                      )}
-                      <Image
-                        alt="an image of generated prompt"
-                        src={imageUrl}
-                        width={256}
-                        height={256}
-                        className="rounded-lg border"
-                      />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>
-                      A {icon.breed} {icon.prompt}
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              );
-            })}
-          </TooltipProvider>
+          {generatedImages.map((icon, index) => {
+            const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
+            return (
+              <div
+                className="relative"
+                onMouseOver={() => setHoveredIndex(index)}
+                onMouseOut={() => setHoveredIndex(null)}
+                key={icon.id}
+              >
+                {hoveredIndex === index && (
+                  <DownloadButton fileName={icon.id} imageUrl={imageUrl} />
+                )}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Image
+                      alt="an image of generated prompt"
+                      src={imageUrl}
+                      width={256}
+                      height={256}
+                      className="cursor-pointer rounded-lg border"
+                    />
+                  </DialogTrigger>
+                  <DialogContentImage icon={icon} imageUrl={imageUrl} />
+                </Dialog>
+              </div>
+            );
+          })}
         </section>
       )}
     </>

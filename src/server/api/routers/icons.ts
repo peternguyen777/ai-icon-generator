@@ -10,9 +10,13 @@ export const iconsRouter = createTRPCRouter({
       where: {
         userId: ctx.session.user.id,
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+        { id: "desc" },
+      ],
+      take: 96,
       include: {
         User: {
           select: {
@@ -27,10 +31,13 @@ export const iconsRouter = createTRPCRouter({
   }),
   getCommunityIcons: publicProcedure.query(async ({ ctx }) => {
     const icons = await ctx.prisma.icon.findMany({
-      take: 50,
-      orderBy: {
-        createdAt: "desc",
-      },
+      take: 48,
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+        { id: "desc" },
+      ],
       include: {
         User: {
           select: {

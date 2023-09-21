@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { useState } from "react";
-import type { RouterOutputs } from "~/utils/api";
+import type { GeneratedImages } from "~/pages";
 import { DownloadButton } from "./download-button";
 import { DialogContentImage } from "./imageDialog/image-dialog";
 import { Dialog, DialogTrigger } from "./ui/dialog";
 
-export type IconData = RouterOutputs["icons"]["getIcons"];
-
 interface CollectionProps {
   title: string;
-  data: IconData;
+  data: GeneratedImages;
 }
 
 const BUCKET_NAME = "ai-icon-generator2";
