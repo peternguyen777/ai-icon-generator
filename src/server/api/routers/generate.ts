@@ -26,7 +26,7 @@ async function generateIcon(prompt: string, numberOfIcons = 1) {
     const response = await openai.images.generate({
       prompt,
       n: numberOfIcons,
-      size: "256x256",
+      size: "512x512",
       response_format: "b64_json",
     });
     return response.data?.map((result) => result.b64_json ?? "");
@@ -99,8 +99,9 @@ export const generateRouter = createTRPCRouter({
 
       return createdIcons.map((icon) => {
         return {
-          imageUrl: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
+          id: icon.id,
           prompt: icon.prompt,
+          imageUrl: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
         };
       });
     }),

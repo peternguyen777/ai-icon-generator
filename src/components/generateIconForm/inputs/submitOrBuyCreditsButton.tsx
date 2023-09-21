@@ -2,7 +2,7 @@ import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { api } from "~/utils/api";
 import { FormDescription } from "../../ui/form";
 import { Button } from "../../ui/button";
-import { Spinner } from "../../spinner";
+import { Spinner } from "../../icons/spinner";
 
 export const SubmitOrBuyCreditsButton = ({
   isLoading,

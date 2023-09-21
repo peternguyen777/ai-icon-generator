@@ -5,6 +5,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { DownloadButton } from "~/components/download-button";
 import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
 import { Button, buttonVariants } from "~/components/ui/button";
 import {
@@ -22,6 +23,7 @@ import {
 } from "~/components/ui/tooltip";
 
 export interface GeneratedImage {
+  id: string;
   prompt: string | null;
   imageUrl: string;
 }
@@ -31,29 +33,45 @@ const GenerateGallery = ({
 }: {
   generatedImages: GeneratedImage[];
 }) => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <>
       {generatedImages.length > 0 && (
         <section className="grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <TooltipProvider>
-            {generatedImages.map((image) => (
-              <Tooltip key={image.imageUrl}>
-                <TooltipTrigger asChild>
-                  <Link href={image.imageUrl} target="_blank">
-                    <Image
-                      alt="an image of generated prompt"
-                      src={image.imageUrl}
-                      width={256}
-                      height={256}
-                      className="rounded-lg border"
-                    />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{image.prompt}</p>
-                </TooltipContent>
-              </Tooltip>
-            ))}
+            {generatedImages.map((image, index) => {
+              return (
+                <Tooltip key={image.imageUrl}>
+                  <TooltipTrigger asChild>
+                    <div
+                      className="relative"
+                      onMouseOver={() => setHoveredIndex(index)}
+                      onMouseOut={() => setHoveredIndex(null)}
+                    >
+                      {hoveredIndex === index && (
+                        <DownloadButton
+                          fileName={image.id}
+                          imageUrl={image.imageUrl}
+                        />
+                      )}
+                      <Link href={image.imageUrl} target="_blank">
+                        <Image
+                          alt="an image of generated prompt"
+                          src={image.imageUrl}
+                          width={256}
+                          height={256}
+                          className="rounded-lg border"
+                        />
+                      </Link>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{image.prompt}</p>
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
           </TooltipProvider>
         </section>
       )}
@@ -101,7 +119,11 @@ const HomePage: NextPage = () => {
           </Card>
 
           {isLoggedIn && (
-            <Card className="mt-8 hidden w-full flex-col  bg-gray-50 lg:col-span-2 lg:mt-0 lg:flex">
+            <Card
+              className={`mt-8 ${
+                generatedImages ? `flex` : `hidden lg:flex`
+              } w-full flex-col lg:col-span-2 lg:mt-0`}
+            >
               <>
                 <CardHeader>
                   <CardTitle>Output</CardTitle>
