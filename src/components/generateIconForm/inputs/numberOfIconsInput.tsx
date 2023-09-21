@@ -20,7 +20,7 @@ export const NumberOfIconsInput = () => {
       defaultValue={1}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>4. Number of icons</FormLabel>
+          <FormLabel>5. Number of icons</FormLabel>
           <FormControl>
             <Input
               {...field}
@@ -32,7 +32,7 @@ export const NumberOfIconsInput = () => {
             />
           </FormControl>
           <FormDescription>
-            How many icons do you want? Note: 1 credit per icon.
+            Icons to generate: 1 credit per icon.
           </FormDescription>
           <FormMessage />
         </FormItem>

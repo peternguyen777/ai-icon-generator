@@ -37,6 +37,7 @@ export const generateRouter = createTRPCRouter({
   generateIcon: protectedProcedure
     .input(
       z.object({
+        breed: z.string(),
         prompt: z.string(),
         colour: z.string(),
         style: z.string(),
@@ -65,7 +66,7 @@ export const generateRouter = createTRPCRouter({
         });
       }
 
-      const finalPrompt = `An icon in ${input.style} style, with the prompt: ${input.prompt}. ${input.colour} color, High quality, trendy, deviant art style`;
+      const finalPrompt = `A ${input.breed} dog ${input.prompt}. Icon in ${input.style} style, ${input.colour} tint, happy mood, high-quality, dramatic lighting.`;
 
       const base64EncodedImages = await generateIcon(
         finalPrompt,
@@ -76,6 +77,7 @@ export const generateRouter = createTRPCRouter({
         base64EncodedImages.map(async (image) => {
           const icon = await ctx.prisma.icon.create({
             data: {
+              breed: input.breed,
               prompt: input.prompt,
               userId: ctx.session.user.id,
               colour: input.colour,
@@ -100,7 +102,11 @@ export const generateRouter = createTRPCRouter({
       return createdIcons.map((icon) => {
         return {
           id: icon.id,
-          prompt: icon.prompt,
+          prompt:
+            icon.breed && icon.prompt
+              ? // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                `A ${icon.breed} ${icon.prompt}`
+              : undefined,
           imageUrl: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
         };
       });

@@ -13,8 +13,10 @@ import { NumberOfIconsInput } from "./inputs/numberOfIconsInput";
 import { PromptInput } from "./inputs/promptInput";
 import { StyleSelector } from "./inputs/styleSelector";
 import { SubmitOrBuyCreditsButton } from "./inputs/submitOrBuyCreditsButton";
+import { BreedSelector } from "./inputs/breedSelector";
 
 const FormSchema = z.object({
+  breed: z.string().nonempty("Required"),
   prompt: z.string({
     required_error: "Prompt is required",
   }),
@@ -64,7 +66,7 @@ export function GenerateIconForm({
     generateIcon.mutate(data);
     toast({
       title: "Submitting the prompt:",
-      description: <p>{data.prompt}</p>,
+      description: <p>{`A ${data.breed} ${data.prompt}`}</p>,
     });
   }
 
@@ -72,9 +74,10 @@ export function GenerateIconForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="flex flex-col space-y-6">
+          <BreedSelector />
           <PromptInput />
-          <ColourSelector />
           <StyleSelector />
+          <ColourSelector />
           <NumberOfIconsInput />
         </CardContent>
         <CardFooter className="flex flex-col items-end">
