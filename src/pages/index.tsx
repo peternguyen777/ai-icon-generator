@@ -97,7 +97,9 @@ const HomePage: NextPage = () => {
             {!isLoggedIn && (
               <>
                 <CardHeader>
-                  <CardTitle>Generate an icon 🐶</CardTitle>
+                  <CardTitle className="font-clash">
+                    Generate an icon 🐶
+                  </CardTitle>
                   <CardDescription>Login to begin prompting</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -108,7 +110,9 @@ const HomePage: NextPage = () => {
             {isLoggedIn && (
               <>
                 <CardHeader>
-                  <CardTitle>Generate an icon 🐶</CardTitle>
+                  <CardTitle className="font-clash">
+                    Generate an icon 🐶
+                  </CardTitle>
                 </CardHeader>
                 <GenerateIconForm
                   setGeneratedImages={setGeneratedImages}
@@ -126,7 +130,7 @@ const HomePage: NextPage = () => {
             >
               <>
                 <CardHeader>
-                  <CardTitle>Output</CardTitle>
+                  <CardTitle className="font-clash">Output</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
                   <GenerateGallery generatedImages={generatedImages} />
