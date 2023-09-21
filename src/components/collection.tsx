@@ -4,6 +4,7 @@ import type { RouterOutputs } from "~/utils/api";
 import { DownloadButton } from "./download-button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
+import { useState } from "react";
 
 type IconData = RouterOutputs["icons"]["getIcons"];
 
@@ -15,19 +16,27 @@ interface CollectionProps {
 const BUCKET_NAME = "ai-icon-generator2";
 
 export const Collection = ({ title, data }: CollectionProps) => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <main className="container mx-auto my-12 flex min-h-screen flex-col px-8">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         {title}
       </h1>
       <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
-        {data.map((icon) => {
+        {data.map((icon, index) => {
           const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
           return (
             <HoverCard key={icon.id}>
               <HoverCardTrigger asChild>
-                <div className="relative">
-                  <DownloadButton fileName={icon.id} imageUrl={imageUrl} />
+                <div
+                  className="relative"
+                  onMouseOver={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {hoveredIndex === index && (
+                    <DownloadButton fileName={icon.id} imageUrl={imageUrl} />
+                  )}
                   <Link href={imageUrl} target="_blank">
                     <Image
                       src={imageUrl}
