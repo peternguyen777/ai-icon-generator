@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
@@ -8,12 +7,12 @@ import { toast } from "~/components/ui/use-toast";
 import type { GeneratedImages } from "~/pages";
 import { api } from "~/utils/api";
 import { CardContent, CardFooter } from "../ui/card";
+import { BreedSelector } from "./inputs/breedSelector";
 import { ColourSelector } from "./inputs/colourSelector";
 import { NumberOfIconsInput } from "./inputs/numberOfIconsInput";
 import { PromptInput } from "./inputs/promptInput";
 import { StyleSelector } from "./inputs/styleSelector";
 import { SubmitOrBuyCreditsButton } from "./inputs/submitOrBuyCreditsButton";
-import { BreedSelector } from "./inputs/breedSelector";
 
 const FormSchema = z.object({
   breed: z.string().nonempty("Required"),
@@ -74,6 +73,7 @@ export function GenerateIconForm({
   function onSubmit(data: InferredFormSchema) {
     const parsedData = {
       ...data,
+      // zod has already validated numberOfIcons
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       numberOfIcons: data.numberOfIcons[0]!,
     };
@@ -87,7 +87,7 @@ export function GenerateIconForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={void form.handleSubmit(onSubmit)}>
         <CardContent className="flex flex-col space-y-6">
           <BreedSelector />
           <PromptInput />
