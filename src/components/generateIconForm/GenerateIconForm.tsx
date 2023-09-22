@@ -83,8 +83,10 @@ export function GenerateIconForm({
         <CardContent className="flex flex-col space-y-6">
           <BreedSelector />
           <PromptInput />
-          <StyleSelector />
-          <ColourSelector />
+          <div className="space-y-6 lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0">
+            <StyleSelector />
+            <ColourSelector />
+          </div>
           <NumberOfIconsInput />
         </CardContent>
         <CardFooter className="flex flex-col items-end">

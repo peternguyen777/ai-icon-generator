@@ -85,8 +85,8 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto my-8 flex flex-col px-4 sm:px-8">
-        <div className="grid lg:grid-cols-3 lg:gap-6">
-          <Card className="min-h-[288px] w-full lg:col-span-1 lg:mr-8">
+        <div className="grid lg:grid-cols-5 lg:gap-6 xl:grid-cols-3">
+          <Card className="min-h-[288px] w-full lg:col-span-2 lg:mr-8 xl:col-span-1">
             <CardHeader>
               <CardTitle>Generate an icon</CardTitle>
             </CardHeader>
@@ -100,7 +100,7 @@ const GeneratePage: NextPage = () => {
           <Card
             className={`mt-8 ${
               generatedImages.length > 0 ? `flex` : `hidden lg:flex`
-            } w-full flex-col lg:col-span-2 lg:mt-0`}
+            } w-full flex-col lg:col-span-3 lg:mt-0 xl:col-span-2`}
           >
             <>
               <CardHeader>

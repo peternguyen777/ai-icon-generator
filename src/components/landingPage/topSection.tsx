@@ -15,7 +15,7 @@ const TopSection = () => {
   };
 
   return (
-    <section className="container flex flex-col items-center px-4 pt-20 sm:px-8">
+    <section className="container flex flex-col items-center px-4 pt-16 sm:px-8 sm:pt-20">
       <p className="rounded-full bg-secondary px-6 py-2 text-center">
         🐾 Millions of icons already generated 🦮🐕🐩🐕‍🦺
       </p>
@@ -28,7 +28,7 @@ const TopSection = () => {
         world.
       </h4>
       <Button
-        className="mt-8 cursor-pointer rounded-full"
+        className="mt-8 cursor-pointer rounded-full transition-transform duration-200 hover:scale-110"
         onClick={loginRedirectHandler}
       >
         Generate your icons today

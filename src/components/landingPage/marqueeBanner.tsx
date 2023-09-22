@@ -13,10 +13,7 @@ const MarqueeImages = () => {
   return marqueeImages.data.map((icon) => {
     const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
     return (
-      <div
-        key={icon.id}
-        className="mx-2 h-[192px] w-[192px] cursor-pointer rounded-lg border"
-      >
+      <div key={icon.id} className="mx-2 h-[192px] w-[192px] rounded-lg border">
         <Image
           height={192}
           width={192}
@@ -35,10 +32,10 @@ const MarqueeImages = () => {
 const MarqueeBanner = () => {
   return (
     <div className="relative flex overflow-x-hidden">
-      <div className="flex animate-marquee whitespace-nowrap py-16">
+      <div className="flex animate-marquee whitespace-nowrap pb-16 pt-16 sm:pt-20">
         <MarqueeImages />
       </div>
-      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap py-16">
+      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-16 pt-16 sm:pt-20">
         <MarqueeImages />
       </div>
     </div>

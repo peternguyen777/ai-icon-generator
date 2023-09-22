@@ -60,7 +60,7 @@ export const ColourSelector = () => {
             </SelectContent>
           </Select>
           <div className="flex justify-between">
-            <FormDescription>Pick your icon colour</FormDescription>
+            <FormDescription>Pick your colour</FormDescription>
             <FormMessage />
           </div>
         </FormItem>

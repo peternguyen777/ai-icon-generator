@@ -65,7 +65,7 @@ export const StyleSelector = () => {
             </SelectContent>
           </Select>
           <div className="flex justify-between">
-            <FormDescription>Pick your icon style</FormDescription>
+            <FormDescription>Pick your style</FormDescription>
             <FormMessage />
           </div>
         </FormItem>
