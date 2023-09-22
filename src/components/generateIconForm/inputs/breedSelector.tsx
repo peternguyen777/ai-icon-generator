@@ -66,8 +66,10 @@ export const BreedSelector = () => {
               </ScrollArea>
             </SelectContent>
           </Select>
-          <FormDescription>Pick your 🐶</FormDescription>
-          <FormMessage />
+          <div className="flex justify-between">
+            <FormDescription>Pick your 🐶</FormDescription>
+            <FormMessage />
+          </div>
         </FormItem>
       )}
     />

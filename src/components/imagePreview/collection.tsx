@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import type { GeneratedImages } from "~/pages";
+import type { GeneratedImages } from "~/pages/generate";
 import { DownloadButton } from "./download-button";
 import { DialogContentImage } from "./image-dialog";
 import { Dialog, DialogTrigger } from "../ui/dialog";
@@ -32,6 +32,7 @@ export const Collection = ({ data }: { data: GeneratedImages }) => {
                   className="w-full cursor-pointer rounded-lg"
                   height="128"
                   width="128"
+                  quality={100}
                   alt={
                     icon.breed && icon.prompt
                       ? `A ${icon.breed} dog ${icon.prompt}`

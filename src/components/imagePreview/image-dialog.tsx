@@ -2,7 +2,7 @@ import { ChevronRightSquare, Palette, PawPrint, PenTool } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { capitalizeString } from "~/lib/utils";
-import type { GeneratedImages } from "~/pages";
+import type { GeneratedImages } from "~/pages/generate";
 import { DownloadButton } from "./download-button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
@@ -39,9 +39,9 @@ export const DialogContentImage = ({
     <DialogContent className="rounded-lg p-4 sm:p-6">
       {icon.User?.name && (
         <DialogHeader>
-          <DialogTitle>{`${icon.User.name}'s ${capitalizeString(
-            icon.breed
-          )} `}</DialogTitle>
+          <DialogTitle>
+            {`${icon.User.name}'s ${capitalizeString(icon.breed)} `}
+          </DialogTitle>
         </DialogHeader>
       )}
       <div className="relative">

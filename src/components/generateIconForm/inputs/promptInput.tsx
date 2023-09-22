@@ -17,14 +17,17 @@ export const PromptInput = () => {
     <FormField
       control={form.control}
       name="prompt"
+      defaultValue=""
       render={({ field }) => (
         <FormItem>
           <FormLabel>2. What is it doing?</FormLabel>
           <FormControl>
             <Input placeholder="eating a pizza" {...field} />
           </FormControl>
-          <FormDescription>Describe an action</FormDescription>
-          <FormMessage />
+          <div className="flex justify-between">
+            <FormDescription>Describe an action</FormDescription>
+            <FormMessage />
+          </div>
         </FormItem>
       )}
     />

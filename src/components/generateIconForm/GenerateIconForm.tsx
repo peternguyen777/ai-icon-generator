@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form } from "~/components/ui/form";
 import { toast } from "~/components/ui/use-toast";
-import type { GeneratedImages } from "~/pages";
+import type { GeneratedImages } from "~/pages/generate";
 import { api } from "~/utils/api";
 import { CardContent, CardFooter } from "../ui/card";
 import { BreedSelector } from "./inputs/breedSelector";
@@ -12,13 +12,11 @@ import { ColourSelector } from "./inputs/colourSelector";
 import { NumberOfIconsInput } from "./inputs/numberOfIconsInput";
 import { PromptInput } from "./inputs/promptInput";
 import { StyleSelector } from "./inputs/styleSelector";
-import { SubmitOrBuyCreditsButton } from "./inputs/submitOrBuyCreditsButton";
+import { SubmitOrBuyCreditsButton } from "./inputs/submitButton";
 
 const FormSchema = z.object({
   breed: z.string().nonempty("Required"),
-  prompt: z.string({
-    required_error: "Prompt is required",
-  }),
+  prompt: z.string().trim().min(1, { message: "Required" }),
   colour: z.string().nonempty("Required"),
   style: z.string().nonempty("Required"),
   numberOfIcons: z
@@ -41,10 +39,11 @@ export function GenerateIconForm({
     resolver: zodResolver(FormSchema),
   });
 
+  const utils = api.useContext();
+
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
       setGeneratedImages([...data, ...generatedImages]);
-
       form.reset();
       toast({
         title: "Success!",
@@ -57,8 +56,9 @@ export function GenerateIconForm({
         description: <p>{error.message}</p>,
       });
     },
-    onSettled: () => {
+    onSettled: async () => {
       setIsGenerating(false);
+      await utils.user.getCredits.refetch();
     },
   });
 
@@ -69,6 +69,7 @@ export function GenerateIconForm({
       numberOfIcons: data.numberOfIcons[0]!,
     };
     generateIcon.mutate(parsedData);
+
     setIsGenerating(true);
     toast({
       title: "Submitting the prompt:",

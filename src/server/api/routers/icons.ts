@@ -40,25 +40,27 @@ export const iconsRouter = createTRPCRouter({
       },
     });
   }),
-  getCommunityIcons: publicProcedure.query(async ({ ctx }) => {
-    const icons = await ctx.prisma.icon.findMany({
-      take: 48,
-      orderBy: [
-        {
-          createdAt: "desc",
-        },
-        { id: "desc" },
-      ],
-      include: {
-        User: {
-          select: {
-            image: true,
-            name: true,
+  getCommunityIcons: publicProcedure
+    .input(z.object({ size: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const icons = await ctx.prisma.icon.findMany({
+        take: input.size,
+        orderBy: [
+          {
+            createdAt: "desc",
+          },
+          { id: "desc" },
+        ],
+        include: {
+          User: {
+            select: {
+              image: true,
+              name: true,
+            },
           },
         },
-      },
-    });
+      });
 
-    return icons;
-  }),
+      return icons;
+    }),
 });

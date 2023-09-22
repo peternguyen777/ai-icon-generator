@@ -59,8 +59,10 @@ export const ColourSelector = () => {
               </ScrollArea>
             </SelectContent>
           </Select>
-          <FormDescription>Pick your icon colour</FormDescription>
-          <FormMessage />
+          <div className="flex justify-between">
+            <FormDescription>Pick your icon colour</FormDescription>
+            <FormMessage />
+          </div>
         </FormItem>
       )}
     />

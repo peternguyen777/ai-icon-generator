@@ -14,7 +14,7 @@ export const PaginationBar = ({
   setCurrentPage,
 }: PaginationBarProps) => {
   return (
-    <div className="flex items-center gap-4 font-clash">
+    <div className="flex items-center gap-4">
       <Button
         variant="outline"
         size="icon"
@@ -23,9 +23,7 @@ export const PaginationBar = ({
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
-      <span className="text-md w-16 text-center font-medium">
-        {`${currentPage} / ${totalPages}`}
-      </span>
+      <h4 className=" w-16 text-center">{`${currentPage} / ${totalPages}`}</h4>
       <Button
         variant="outline"
         size="icon"
