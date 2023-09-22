@@ -32,6 +32,7 @@ export const Collection = ({ data }: { data: GeneratedImages }) => {
                   className="w-full cursor-pointer rounded-lg"
                   height="128"
                   width="128"
+                  quality={100}
                   alt={
                     icon.breed && icon.prompt
                       ? `A ${icon.breed} dog ${icon.prompt}`
