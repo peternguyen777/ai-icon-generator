@@ -33,11 +33,7 @@ export const Collection = ({ data }: { data: GeneratedImages }) => {
                   height="128"
                   width="128"
                   quality={100}
-                  alt={
-                    icon.breed && icon.prompt
-                      ? `A ${icon.breed} dog ${icon.prompt}`
-                      : `A dog icon`
-                  }
+                  alt="an ai generated dog icon"
                 />
               </DialogTrigger>
               <DialogContentImage icon={icon} imageUrl={imageUrl} />

@@ -50,7 +50,7 @@ const GenerateGallery = ({
                 <Dialog>
                   <DialogTrigger asChild>
                     <Image
-                      alt="an image of generated prompt"
+                      alt="an ai generated dog icon"
                       src={imageUrl}
                       width={256}
                       height={256}
@@ -116,7 +116,7 @@ const GeneratePage: NextPage = () => {
               ) : generatedImages.length === 0 ? (
                 <CardContent className="flex flex-grow flex-col items-center justify-center">
                   <Image
-                    src="/emptygallery-light.png"
+                    src="/emptygallery.png"
                     alt="empty gallery"
                     width={192}
                     height={192}

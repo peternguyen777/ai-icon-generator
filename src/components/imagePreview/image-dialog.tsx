@@ -48,7 +48,7 @@ export const DialogContentImage = ({
         <DownloadButton fileName={fileName} imageUrl={imageUrl} />
         <Image
           src={imageUrl}
-          alt="your icon"
+          alt="an ai generated dog icon"
           width={512}
           height={512}
           className="rounded-lg"

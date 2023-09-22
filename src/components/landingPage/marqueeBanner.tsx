@@ -22,6 +22,7 @@ const MarqueeImages = ({ data }: { data: GeneratedImages }) => {
               src={imageUrl}
               alt={icon.breed}
               className="rounded-lg"
+              priority
             />
             <Badge variant="secondary" className="mt-2">
               {capitalizeString(icon.breed)}
