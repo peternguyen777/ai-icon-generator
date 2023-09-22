@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
@@ -66,7 +65,6 @@ export function GenerateIconForm({
   function onSubmit(data: InferredFormSchema) {
     const parsedData = {
       ...data,
-      // zod has already validated numberOfIcons
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       numberOfIcons: data.numberOfIcons[0]!,
     };

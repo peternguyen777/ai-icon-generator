@@ -14,10 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useRouter } from "next/router";
 
 export function UserNavLoggedIn({ userData }: { userData: Session }) {
-  const router = useRouter();
   const { buyCredits } = useBuyCredits();
 
   const credits = api.user.getCredits.useQuery();
@@ -69,12 +67,11 @@ export function UserNavLoggedIn({ userData }: { userData: Session }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => {
-            signOut().catch(console.error);
-            void router.push("/");
+            void signOut({ callbackUrl: "/" });
           }}
           className="cursor-pointer"
         >
-          Log out
+          Logout
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -94,10 +91,10 @@ export function UserNavLoggedOut() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuItem
-          onClick={() => void signIn("google")}
+          onClick={() => signIn("google")}
           className="cursor-pointer"
         >
-          Login with Google
+          Login
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
