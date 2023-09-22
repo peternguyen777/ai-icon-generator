@@ -16,9 +16,7 @@ import { SubmitOrBuyCreditsButton } from "./inputs/submitButton";
 
 const FormSchema = z.object({
   breed: z.string().nonempty("Required"),
-  prompt: z
-    .string({ required_error: "Prompt is required" })
-    .nonempty("Required"),
+  prompt: z.string().trim().min(1, { message: "Required" }),
   colour: z.string().nonempty("Required"),
   style: z.string().nonempty("Required"),
   numberOfIcons: z
