@@ -10,7 +10,10 @@ const MarqueeImages = ({ data }: { data: GeneratedImages }) => {
   return data.map((icon) => {
     const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
     return (
-      <div key={icon.id} className="mx-2 h-[192px] w-[192px] rounded-lg border">
+      <div
+        key={icon.id}
+        className="mx-2 h-[192px] w-[192px] rounded-lg border transition-transform duration-200 hover:scale-105"
+      >
         <Image
           height={192}
           width={192}
