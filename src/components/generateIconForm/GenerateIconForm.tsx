@@ -72,7 +72,12 @@ export function GenerateIconForm({
   });
 
   function onSubmit(data: InferredFormSchema) {
-    generateIcon.mutate(data);
+    const parsedData = {
+      ...data,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      numberOfIcons: data.numberOfIcons[0]!,
+    };
+    generateIcon.mutate(parsedData);
     setIsGenerating(true);
     toast({
       title: "Submitting the prompt:",

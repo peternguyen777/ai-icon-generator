@@ -34,13 +34,11 @@ export const NumberOfIconsInput = () => {
               step={1}
               defaultValue={value}
               onValueChange={onChange}
-              className="py-4 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
+              className="pb-2 pt-4 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
               aria-label="Number of Icons"
             />
           </FormControl>
-          <FormDescription>
-            Icons to generate: 1 credit per icon.
-          </FormDescription>
+          <FormDescription>One credit per icon</FormDescription>
           <FormMessage />
         </FormItem>
       )}

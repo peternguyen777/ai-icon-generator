@@ -41,22 +41,21 @@ export const generateRouter = createTRPCRouter({
         prompt: z.string(),
         colour: z.string(),
         style: z.string(),
-        numberOfIcons: z
-          .array(z.number().int().min(1).max(10))
-          .refine((arr) => arr.length === 1),
+        numberOfIcons: z.number().int().min(1).max(10),
       })
     )
     .mutation(async ({ ctx, input }) => {
+      console.log(input);
       const { count } = await ctx.prisma.user.updateMany({
         where: {
           id: ctx.session.user.id,
           credits: {
-            gte: input.numberOfIcons[0],
+            gte: input.numberOfIcons,
           },
         },
         data: {
           credits: {
-            decrement: input.numberOfIcons[0],
+            decrement: input.numberOfIcons,
           },
         },
       });
@@ -72,7 +71,7 @@ export const generateRouter = createTRPCRouter({
 
       const base64EncodedImages = await generateIcon(
         finalPrompt,
-        input.numberOfIcons[0]
+        input.numberOfIcons
       );
 
       const createdIcons = await Promise.all(
