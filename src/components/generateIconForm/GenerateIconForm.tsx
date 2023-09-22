@@ -16,7 +16,9 @@ import { SubmitOrBuyCreditsButton } from "./inputs/submitButton";
 
 const FormSchema = z.object({
   breed: z.string().nonempty("Required"),
-  prompt: z.string().nonempty("Required"),
+  prompt: z
+    .string({ required_error: "Prompt is required" })
+    .nonempty("Required"),
   colour: z.string().nonempty("Required"),
   style: z.string().nonempty("Required"),
   numberOfIcons: z
@@ -39,10 +41,11 @@ export function GenerateIconForm({
     resolver: zodResolver(FormSchema),
   });
 
+  const utils = api.useContext();
+
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess: (data) => {
       setGeneratedImages([...data, ...generatedImages]);
-
       form.reset();
       toast({
         title: "Success!",
@@ -55,8 +58,9 @@ export function GenerateIconForm({
         description: <p>{error.message}</p>,
       });
     },
-    onSettled: () => {
+    onSettled: async () => {
       setIsGenerating(false);
+      await utils.user.getCredits.refetch();
     },
   });
 
@@ -67,6 +71,7 @@ export function GenerateIconForm({
       numberOfIcons: data.numberOfIcons[0]!,
     };
     generateIcon.mutate(parsedData);
+
     setIsGenerating(true);
     toast({
       title: "Submitting the prompt:",

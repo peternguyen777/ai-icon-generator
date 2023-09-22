@@ -17,6 +17,7 @@ export const PromptInput = () => {
     <FormField
       control={form.control}
       name="prompt"
+      defaultValue=""
       render={({ field }) => (
         <FormItem>
           <FormLabel>2. What is it doing?</FormLabel>
