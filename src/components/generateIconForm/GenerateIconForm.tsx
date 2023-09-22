@@ -23,13 +23,16 @@ const FormSchema = z.object({
   colour: z.string().nonempty("Required"),
   style: z.string().nonempty("Required"),
   numberOfIcons: z
-    .number({
-      required_error: "Number is required",
-      invalid_type_error: "Must be a whole number between 1 and 10",
-    })
-    .int()
-    .min(1)
-    .max(10),
+    .array(
+      z
+        .number()
+        .int()
+        .min(1, { message: "Value must be greater than or equal to 1" })
+        .max(10, { message: "Value must be less than or equal to 10" })
+    )
+    .refine((arr) => arr.length === 1, {
+      message: "Array must contain exactly one element",
+    }),
 });
 
 export type InferredFormSchema = z.infer<typeof FormSchema>;

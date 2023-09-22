@@ -41,7 +41,9 @@ export const generateRouter = createTRPCRouter({
         prompt: z.string(),
         colour: z.string(),
         style: z.string(),
-        numberOfIcons: z.number().min(1).max(10),
+        numberOfIcons: z
+          .array(z.number().int().min(1).max(10))
+          .refine((arr) => arr.length === 1),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -49,12 +51,12 @@ export const generateRouter = createTRPCRouter({
         where: {
           id: ctx.session.user.id,
           credits: {
-            gte: input.numberOfIcons,
+            gte: input.numberOfIcons[0],
           },
         },
         data: {
           credits: {
-            decrement: input.numberOfIcons,
+            decrement: input.numberOfIcons[0],
           },
         },
       });
@@ -70,7 +72,7 @@ export const generateRouter = createTRPCRouter({
 
       const base64EncodedImages = await generateIcon(
         finalPrompt,
-        input.numberOfIcons
+        input.numberOfIcons[0]
       );
 
       const createdIcons = await Promise.all(
