@@ -95,7 +95,7 @@ const HomePage: NextPage = () => {
                   <CardDescription>Login to begin prompting</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button onClick={() => void signIn("google")}>Login</Button>
+                  <Button onClick={() => signIn("google")}>Login</Button>
                 </CardContent>
               </>
             )}
