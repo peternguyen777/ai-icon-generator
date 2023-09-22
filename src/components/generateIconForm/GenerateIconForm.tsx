@@ -22,13 +22,7 @@ const FormSchema = z.object({
   colour: z.string().nonempty("Required"),
   style: z.string().nonempty("Required"),
   numberOfIcons: z
-    .array(
-      z
-        .number()
-        .int()
-        .min(1, { message: "Value must be greater than or equal to 1" })
-        .max(10, { message: "Value must be less than or equal to 10" })
-    )
+    .array(z.number().int().min(1).max(10))
     .refine((arr) => arr.length === 1),
 });
 
