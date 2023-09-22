@@ -17,14 +17,15 @@ const CollectionPage: NextPage = () => {
     <>
       <Head>
         <title>Your Icons</title>
-        <meta name="description" content="Your icons" />
+        <meta
+          name="WoofAi AI powered dog icon generator"
+          content="personal collection page for dog icon generator app"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto my-8 flex min-h-screen flex-col px-4 sm:my-12 sm:px-8">
         <div className="flex items-center justify-between">
-          <h1 className="scroll-m-20 font-clash text-2xl font-medium tracking-tight lg:text-4xl">
-            Your icons
-          </h1>
+          <h2>Your icons</h2>
           {totalPages > 0 && (
             <PaginationBar
               currentPage={currentPage}
