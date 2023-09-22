@@ -4,7 +4,7 @@ import { Collection } from "~/components/imagePreview/collection";
 import { api } from "~/utils/api";
 
 const CommunityPage: NextPage = () => {
-  const icons = api.icons.getCommunityIcons.useQuery();
+  const icons = api.icons.getCommunityIcons.useQuery({ size: 48 });
 
   return (
     <>
