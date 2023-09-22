@@ -63,4 +63,23 @@ export const iconsRouter = createTRPCRouter({
 
       return icons;
     }),
+  getIconsByIds: publicProcedure
+    .input(z.object({ imageIds: z.array(z.string()) }))
+    .query(async ({ ctx, input }) => {
+      const icons = await ctx.prisma.icon.findMany({
+        where: {
+          id: { in: input.imageIds },
+        },
+        include: {
+          User: {
+            select: {
+              image: true,
+              name: true,
+            },
+          },
+        },
+      });
+
+      return icons;
+    }),
 });

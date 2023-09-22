@@ -129,7 +129,7 @@ const GeneratePage: NextPage = () => {
                   </h4>
                 </CardContent>
               ) : (
-                <ScrollArea className="h-[656px] pb-8">
+                <ScrollArea className="h-[526px] pb-8">
                   <CardContent className="flex-grow">
                     <GenerateGallery generatedImages={generatedImages} />
                   </CardContent>
