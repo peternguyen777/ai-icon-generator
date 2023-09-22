@@ -28,14 +28,12 @@ export const NumberOfIconsInput = () => {
           </div>
           <FormControl>
             <Slider
-              id="numberOfIcons"
               min={1}
               max={10}
               step={1}
-              defaultValue={value}
+              value={value}
               onValueChange={onChange}
               className="pb-2 pt-4 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
-              aria-label="Number of Icons"
             />
           </FormControl>
           <FormDescription>One credit per icon</FormDescription>

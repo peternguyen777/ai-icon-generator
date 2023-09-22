@@ -14,7 +14,6 @@ export const SubmitOrBuyCreditsButton = ({
   return (
     <>
       <FormDescription>Available Credits: {credits.data}</FormDescription>
-
       <Button
         className={`mt-4 w-full`}
         type="submit"
