@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import type { GeneratedImages } from "~/pages";
+import type { GeneratedImages } from "~/pages/generate";
 import { DownloadButton } from "./download-button";
 import { DialogContentImage } from "./image-dialog";
 import { Dialog, DialogTrigger } from "../ui/dialog";

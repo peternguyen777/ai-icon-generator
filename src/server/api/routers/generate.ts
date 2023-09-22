@@ -45,7 +45,6 @@ export const generateRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      console.log(input);
       const { count } = await ctx.prisma.user.updateMany({
         where: {
           id: ctx.session.user.id,
