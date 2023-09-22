@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
@@ -79,7 +80,7 @@ export function GenerateIconForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={void form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="flex flex-col space-y-6">
           <BreedSelector />
           <PromptInput />
