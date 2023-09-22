@@ -10,14 +10,15 @@ const CommunityPage: NextPage = () => {
     <>
       <Head>
         <title>Community icons</title>
-        <meta name="description" content="Community icons" />
+        <meta
+          name="WoofAi AI powered dog icon generator"
+          content="community icons page for dog icon generator app"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto my-8 flex min-h-screen flex-col px-4 sm:my-12 sm:px-8">
         <div className="flex items-center justify-between">
-          <h1 className="scroll-m-20 font-clash text-2xl font-medium tracking-tight lg:text-4xl">
-            Community
-          </h1>
+          <h2>Community</h2>
         </div>
         {icons.data && <Collection data={icons.data} />}
       </main>

@@ -18,9 +18,7 @@ export const Header = () => {
             width={30}
             height={30}
           />
-          <h1 className="font-clash text-2xl font-semibold leading-none  lg:text-3xl">
-            WoofAI
-          </h1>
+          <h2>WoofAI</h2>
         </Link>
         <div className="flex items-center gap-4">
           <ModeToggle />
