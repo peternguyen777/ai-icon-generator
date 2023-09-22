@@ -29,9 +29,7 @@ const FormSchema = z.object({
         .min(1, { message: "Value must be greater than or equal to 1" })
         .max(10, { message: "Value must be less than or equal to 10" })
     )
-    .refine((arr) => arr.length === 1, {
-      message: "Array must contain exactly one element",
-    }),
+    .refine((arr) => arr.length === 1),
 });
 
 export type InferredFormSchema = z.infer<typeof FormSchema>;
