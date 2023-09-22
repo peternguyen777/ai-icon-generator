@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { api } from "~/utils/api";
 import { Badge } from "../ui/badge";
+import { capitalizeString } from "~/lib/utils";
 
 const BUCKET_NAME = "ai-icon-generator2";
 
@@ -12,16 +13,19 @@ const MarqueeImages = () => {
   return marqueeImages.data.map((icon) => {
     const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
     return (
-      <div key={icon.id} className="mx-2 h-[192px] w-[192px] cursor-pointer">
+      <div
+        key={icon.id}
+        className="mx-2 h-[192px] w-[192px] cursor-pointer rounded-lg border"
+      >
         <Image
           height={192}
           width={192}
           src={imageUrl}
           alt={icon.breed}
-          className="rounded-lg border"
+          className="rounded-lg"
         />
         <Badge variant="secondary" className="mt-2">
-          {icon.breed}
+          {capitalizeString(icon.breed)}
         </Badge>
       </div>
     );
