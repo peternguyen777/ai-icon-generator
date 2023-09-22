@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { Slider } from "~/components/ui/slider";
 import {
   FormControl,
   FormDescription,
@@ -7,7 +8,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import { Input } from "../../ui/input";
 import { type InferredFormSchema } from "../GenerateIconForm";
 
 export const NumberOfIconsInput = () => {
@@ -17,23 +17,28 @@ export const NumberOfIconsInput = () => {
     <FormField
       control={form.control}
       name="numberOfIcons"
-      defaultValue={1}
-      render={({ field }) => (
+      defaultValue={[5]}
+      render={({ field: { value, onChange } }) => (
         <FormItem>
-          <FormLabel>5. Number of icons</FormLabel>
+          <div className="flex items-center justify-between">
+            <FormLabel>5. Number of icons</FormLabel>
+            <span className="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">
+              {value}
+            </span>
+          </div>
           <FormControl>
-            <Input
-              {...field}
-              type="number"
-              defaultValue={field.value}
+            <Slider
+              id="numberOfIcons"
               min={1}
               max={10}
-              {...form.register("numberOfIcons", { valueAsNumber: true })}
+              step={1}
+              defaultValue={value}
+              onValueChange={onChange}
+              className="pb-2 pt-4 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
+              aria-label="Number of Icons"
             />
           </FormControl>
-          <FormDescription>
-            Icons to generate: 1 credit per icon.
-          </FormDescription>
+          <FormDescription>One credit per icon</FormDescription>
           <FormMessage />
         </FormItem>
       )}

@@ -8,12 +8,12 @@ import { toast } from "~/components/ui/use-toast";
 import type { GeneratedImages } from "~/pages";
 import { api } from "~/utils/api";
 import { CardContent, CardFooter } from "../ui/card";
+import { BreedSelector } from "./inputs/breedSelector";
 import { ColourSelector } from "./inputs/colourSelector";
 import { NumberOfIconsInput } from "./inputs/numberOfIconsInput";
 import { PromptInput } from "./inputs/promptInput";
 import { StyleSelector } from "./inputs/styleSelector";
 import { SubmitOrBuyCreditsButton } from "./inputs/submitOrBuyCreditsButton";
-import { BreedSelector } from "./inputs/breedSelector";
 
 const FormSchema = z.object({
   breed: z.string().nonempty("Required"),
@@ -23,13 +23,8 @@ const FormSchema = z.object({
   colour: z.string().nonempty("Required"),
   style: z.string().nonempty("Required"),
   numberOfIcons: z
-    .number({
-      required_error: "Number is required",
-      invalid_type_error: "Must be a whole number between 1 and 10",
-    })
-    .int()
-    .min(1)
-    .max(10),
+    .array(z.number().int().min(1).max(10))
+    .refine((arr) => arr.length === 1),
 });
 
 export type InferredFormSchema = z.infer<typeof FormSchema>;
@@ -69,7 +64,13 @@ export function GenerateIconForm({
   });
 
   function onSubmit(data: InferredFormSchema) {
-    generateIcon.mutate(data);
+    const parsedData = {
+      ...data,
+      // zod has already validated numberOfIcons
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      numberOfIcons: data.numberOfIcons[0]!,
+    };
+    generateIcon.mutate(parsedData);
     setIsGenerating(true);
     toast({
       title: "Submitting the prompt:",
