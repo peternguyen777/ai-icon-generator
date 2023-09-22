@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form } from "~/components/ui/form";
 import { toast } from "~/components/ui/use-toast";
-import type { GeneratedImages } from "~/pages";
+import type { GeneratedImages } from "~/pages/generate";
 import { api } from "~/utils/api";
 import { CardContent, CardFooter } from "../ui/card";
 import { BreedSelector } from "./inputs/breedSelector";
@@ -12,13 +12,11 @@ import { ColourSelector } from "./inputs/colourSelector";
 import { NumberOfIconsInput } from "./inputs/numberOfIconsInput";
 import { PromptInput } from "./inputs/promptInput";
 import { StyleSelector } from "./inputs/styleSelector";
-import { SubmitOrBuyCreditsButton } from "./inputs/submitOrBuyCreditsButton";
+import { SubmitOrBuyCreditsButton } from "./inputs/submitButton";
 
 const FormSchema = z.object({
   breed: z.string().nonempty("Required"),
-  prompt: z.string({
-    required_error: "Prompt is required",
-  }),
+  prompt: z.string().nonempty("Required"),
   colour: z.string().nonempty("Required"),
   style: z.string().nonempty("Required"),
   numberOfIcons: z

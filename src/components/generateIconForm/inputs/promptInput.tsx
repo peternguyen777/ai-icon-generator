@@ -23,8 +23,10 @@ export const PromptInput = () => {
           <FormControl>
             <Input placeholder="eating a pizza" {...field} />
           </FormControl>
-          <FormDescription>Describe an action</FormDescription>
-          <FormMessage />
+          <div className="flex justify-between">
+            <FormDescription>Describe an action</FormDescription>
+            <FormMessage />
+          </div>
         </FormItem>
       )}
     />

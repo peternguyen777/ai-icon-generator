@@ -55,7 +55,7 @@ export function UserNavLoggedIn({ userData }: { userData: Session }) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer">
-            <Link href="/">Generate</Link>
+            <Link href="/generate">Generate</Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <Link href="/collection">My icons</Link>

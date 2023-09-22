@@ -17,12 +17,12 @@ export const NumberOfIconsInput = () => {
     <FormField
       control={form.control}
       name="numberOfIcons"
-      defaultValue={[5]}
+      defaultValue={[1]}
       render={({ field: { value, onChange } }) => (
         <FormItem>
           <div className="flex items-center justify-between">
             <FormLabel>5. Number of icons</FormLabel>
-            <span className="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">
+            <span className="w-12 rounded-md border px-2 py-0.5 text-center text-sm font-medium">
               {value}
             </span>
           </div>
