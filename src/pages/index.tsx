@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-// import MarqueeBanner from "~/components/landingPage/marqueeBanner";
+import MarqueeBanner from "~/components/landingPage/marqueeBanner";
 import TopSection from "~/components/landingPage/topSection";
 
 const HomePage: NextPage = () => {
@@ -16,7 +16,7 @@ const HomePage: NextPage = () => {
       </Head>
       <main>
         <TopSection />
-        {/* <MarqueeBanner /> */}
+        <MarqueeBanner />
       </main>
     </>
   );
