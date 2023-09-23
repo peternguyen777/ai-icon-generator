@@ -15,14 +15,14 @@ const TopSection = () => {
   };
 
   return (
-    <section className="container flex flex-col items-center px-4 pt-16 sm:px-8 sm:pt-20">
+    <section className="container flex flex-col items-center px-4 py-24 sm:px-8 sm:pt-20">
       <p className="rounded-full bg-secondary px-6 py-2 text-center">
-        🐾 Millions of icons already generated 🦮🐕🐩🐕‍🦺
+        🦮🐕 Say hello to your new friends! 🐩🐕‍🦺
       </p>
-      <h1 className="mb-6 mt-10 text-center">
+      <h1 className="mt-10 bg-gradient-to-bl from-primary to-primary/50 bg-clip-text text-center text-transparent">
         Paws, Click, Create:
-        <br /> Icon Magic Unleashed!
       </h1>
+      <h1 className="mb-6 text-center">Icon Magic Unleashed!</h1>
       <h4 className="text-center">
         Create your own AI dogs & connect with other dog owners around the
         world.

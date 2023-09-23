@@ -41,13 +41,13 @@ const MarqueeBanner = () => {
       "clmu9hgp0001tq5wqv0i08heh",
       "clmspx0pv000htlv76bw8gdlf",
       "clmt64d910001tlqdbw7f2utd",
-      "clmstm24g0029tlv7zshfce48",
       "clmu9g7yy001pq5wqidgn2uj8",
-      "clmspu8wy0007tlv7yx27sv0n",
+      "clmstm24g0029tlv7zshfce48",
+      "clmsud05f003dtlv7nksr3bqq",
       "clmtd3kbp0005js08n45vmmi3",
+      "clmspu8wy0007tlv7yx27sv0n",
       "clmuqr2kr000dq5xo72028k6d",
       "clmsuul0l003jtlv7mlx87p3m",
-      "clmsud05f003dtlv7nksr3bqq",
     ],
   });
 
@@ -55,10 +55,10 @@ const MarqueeBanner = () => {
 
   return (
     <div className="relative flex overflow-x-hidden">
-      <div className="flex animate-marquee whitespace-nowrap pb-16 pt-16 sm:pt-20">
+      <div className="flex animate-marquee whitespace-nowrap pb-16">
         <MarqueeImages data={marqueeImages.data} />
       </div>
-      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-16 pt-16 sm:pt-20">
+      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-16">
         <MarqueeImages data={marqueeImages.data} />
       </div>
     </div>
