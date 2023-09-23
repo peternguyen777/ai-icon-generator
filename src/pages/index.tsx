@@ -14,7 +14,7 @@ const HomePage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col">
+      <main>
         <TopSection />
         <MarqueeBanner />
       </main>

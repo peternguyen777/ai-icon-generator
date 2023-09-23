@@ -23,7 +23,7 @@ const CollectionPage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto my-8 flex min-h-screen flex-col px-4 sm:my-12 sm:px-8">
+      <main className="container mx-auto my-8 flex flex-col px-4 sm:my-12 sm:px-8">
         <div className="flex items-center justify-between">
           <h2>Your icons</h2>
           {totalPages > 0 && (

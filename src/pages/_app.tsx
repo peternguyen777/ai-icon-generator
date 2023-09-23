@@ -40,10 +40,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
       >
         <SessionProvider session={session}>
           <main className={`${clash.variable}`}>
-            <Header />
-            <Toaster />
-            <Component {...pageProps} />
-            <Footer />
+            <div className="flex min-h-screen flex-col">
+              <div className="flex-grow">
+                <Header />
+                <Toaster />
+                <Component {...pageProps} />
+              </div>
+              <Footer />
+            </div>
           </main>
         </SessionProvider>
       </ThemeProvider>
