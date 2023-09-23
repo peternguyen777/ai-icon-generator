@@ -66,7 +66,7 @@ export const generateRouter = createTRPCRouter({
         });
       }
 
-      const finalPrompt = `A cute ${input.breed} dog ${input.prompt}. Icon in ${input.style} style, ${input.colour} tint, happy mood, high-quality, dramatic lighting.`;
+      const finalPrompt = `A ${input.breed} dog ${input.prompt}. Icon in ${input.style} style, ${input.colour} tint, happy mood, high-quality, dramatic lighting.`;
 
       const base64EncodedImages = await generateIcon(
         finalPrompt,

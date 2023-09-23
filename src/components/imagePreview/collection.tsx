@@ -29,7 +29,7 @@ export const Collection = ({ data }: { data: GeneratedImages }) => {
               <DialogTrigger asChild>
                 <Image
                   src={imageUrl}
-                  className="w-full cursor-pointer rounded-lg"
+                  className="w-full cursor-pointer rounded-lg transition-transform duration-300 hover:scale-105"
                   height="128"
                   width="128"
                   quality={100}

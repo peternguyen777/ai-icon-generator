@@ -9,8 +9,8 @@ const Header = () => {
   const isLoggedIn = !!session.data;
 
   return (
-    <nav className="border-b">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-8 lg:h-20 ">
+    <nav className="sticky top-0 z-20 border-b bg-background/80 backdrop-blur-lg">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-8 lg:h-24 ">
         <Link className="flex items-center gap-4" href="/">
           <Image
             src="/shiba-inu.png"

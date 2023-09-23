@@ -43,7 +43,7 @@ const TOSPage: NextPage = () => {
           applicable laws and regulations. You shall not engage in any
           activities that:
         </p>
-        <ol className="pl-6">
+        <ol className="space-y-2 pl-6">
           <li>a. Violate any intellectual property rights;</li>
           <li>b. Are illegal, unethical, or harmful;</li>
           <li>c. Disrupt the integrity or performance of our services;</li>

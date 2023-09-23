@@ -25,7 +25,7 @@ const PrivacyPolicyPage: NextPage = () => {
         </p>
         <h4>2. Information We Collect</h4>
         <p>We may collect the following types of personal information:</p>
-        <ol className="pl-6">
+        <ol className="space-y-2 pl-6">
           <li>
             a. <strong>User-Provided Information:</strong> When you create an
             account or use our services, you may provide us with information
@@ -43,7 +43,7 @@ const PrivacyPolicyPage: NextPage = () => {
         </ol>
         <h4>3. Use of Information</h4>
         <p>We use your personal information for the following purposes:</p>
-        <ol className="pl-6">
+        <ol className="space-y-2 pl-6">
           <li>
             a. To provide and improve our services, including generating icons
             and designs.
@@ -64,7 +64,7 @@ const PrivacyPolicyPage: NextPage = () => {
         <p>
           We may share your personal information in the following circumstances:
         </p>
-        <ol className="pl-6">
+        <ol className="space-y-2 pl-6">
           <li>
             a. With our service providers, who assist us in providing and
             improving our services.
@@ -97,7 +97,7 @@ const PrivacyPolicyPage: NextPage = () => {
         <p>
           You have the following choices regarding your personal information:
         </p>
-        <ol className="pl-6">
+        <ol className="space-y-2 pl-6">
           <li>
             a. <strong>Access and Update:</strong> You can access and update
             your account information through your account settings.
@@ -130,7 +130,7 @@ const PrivacyPolicyPage: NextPage = () => {
           If you have any questions or concerns about this Privacy Policy or our
           data practices, please contact us at:
         </p>
-        <p>
+        <p className="pl-6">
           WoofAI Pty Ltd
           <br />
           Sydney, New South Wales

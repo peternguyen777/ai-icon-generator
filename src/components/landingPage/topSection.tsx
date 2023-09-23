@@ -1,6 +1,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const TopSection = () => {
   const session = useSession();
@@ -16,9 +17,11 @@ const TopSection = () => {
 
   return (
     <section className="container flex flex-col items-center px-4 py-24 sm:px-8 sm:pt-20">
-      <p className="rounded-full bg-secondary px-6 py-2 text-center">
-        🦮🐕 Say hello to your new friends! 🐩🐕‍🦺
-      </p>
+      <Link href="/community">
+        <p className="animate-bounce rounded-full bg-secondary px-6 py-3 text-center text-sm">
+          🦮🐕 Say hello to our new friends! 🐩🐕‍🦺
+        </p>
+      </Link>
       <h1 className="mt-10 bg-gradient-to-bl from-primary to-primary/50 bg-clip-text text-center text-transparent">
         Paws, Click, Create:
       </h1>

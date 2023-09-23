@@ -84,11 +84,11 @@ const GeneratePage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto my-8 flex flex-col px-4 sm:px-8">
+      <main className="container mx-auto my-8 flex flex-col px-4 sm:my-12 sm:px-8">
         <div className="grid lg:grid-cols-5 lg:gap-6 xl:grid-cols-3">
           <Card className="min-h-[288px] w-full lg:col-span-2 lg:mr-8 xl:col-span-1">
             <CardHeader>
-              <CardTitle>Generate an icon</CardTitle>
+              <CardTitle className="font-clash">Generate 🐕‍🦺</CardTitle>
             </CardHeader>
             <GenerateIconForm
               setGeneratedImages={setGeneratedImages}
@@ -104,7 +104,7 @@ const GeneratePage: NextPage = () => {
           >
             <>
               <CardHeader>
-                <CardTitle>Output</CardTitle>
+                <CardTitle className="font-clash">Output</CardTitle>
               </CardHeader>
               {isGenerating && generatedImages.length === 0 ? (
                 <CardContent className="flex flex-grow flex-col items-center justify-center">
@@ -129,7 +129,7 @@ const GeneratePage: NextPage = () => {
                   </h4>
                 </CardContent>
               ) : (
-                <ScrollArea className="h-[526px] pb-8">
+                <ScrollArea className="pb-8 lg:h-[526px]">
                   <CardContent className="flex-grow">
                     <GenerateGallery generatedImages={generatedImages} />
                   </CardContent>
