@@ -11,7 +11,9 @@ const CollectionPage: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const iconsCount = api.icons.getTotalIcons.useQuery();
   const totalPages = getTotalPages(iconsCount.data);
-  const icons = api.icons.getIcons.useQuery({ page: currentPage });
+  const { data, isLoading } = api.icons.getIcons.useQuery({
+    page: currentPage,
+  });
 
   return (
     <>
@@ -34,7 +36,7 @@ const CollectionPage: NextPage = () => {
             />
           )}
         </div>
-        {icons.data && <Collection data={icons.data} />}
+        <Collection data={data} isLoading={isLoading} />
       </main>
     </>
   );

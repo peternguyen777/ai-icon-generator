@@ -4,15 +4,32 @@ import type { GeneratedImages } from "~/pages/generate";
 import { DownloadButton } from "./download-button";
 import { DialogContentImage } from "./image-dialog";
 import { Dialog, DialogTrigger } from "../ui/dialog";
+import { Skeleton } from "../ui/skeleton";
 
 const BUCKET_NAME = "ai-icon-generator2";
 
-export const Collection = ({ data }: { data: GeneratedImages }) => {
+export const Collection = ({
+  data,
+  isLoading,
+}: {
+  data?: GeneratedImages;
+  isLoading: boolean;
+}) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  if (isLoading) {
+    return (
+      <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-12 sm:grid-cols-4 md:grid-cols-6">
+        {Array.from({ length: 24 }, (_, i) => (
+          <Skeleton key={i} className="w-full rounded-lg pb-[100%]" />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-12 sm:grid-cols-4 md:grid-cols-6">
-      {data.map((icon, index) => {
+      {data?.map((icon, index) => {
         const fileName = `${icon.breed} ${icon.prompt}`;
         const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
         return (

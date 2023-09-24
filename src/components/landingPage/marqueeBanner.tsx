@@ -11,7 +11,7 @@ const MarqueeImages = ({
   data,
   isLoading,
 }: {
-  data: GeneratedImages;
+  data?: GeneratedImages;
   isLoading: boolean;
 }) => {
   if (isLoading)
@@ -28,7 +28,7 @@ const MarqueeImages = ({
 
   return (
     <>
-      {data.map((icon) => {
+      {data?.map((icon) => {
         const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`;
         return (
           <div
@@ -69,8 +69,6 @@ const MarqueeBanner = () => {
       "clmsuul0l003jtlv7mlx87p3m",
     ],
   });
-
-  if (!data) return null;
 
   return (
     <div className="relative flex overflow-x-hidden">
