@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Head from "next/head";
 import Image from "next/image";
@@ -19,6 +20,7 @@ import {
 import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import type { RouterOutputs } from "~/utils/api";
+import Unauthenticated from "./unauthenticated";
 
 export type GeneratedImages = RouterOutputs["generate"]["generateIcon"];
 
@@ -73,6 +75,12 @@ const GeneratePage: NextPage = () => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const { resolvedTheme } = useTheme();
+
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    return <Unauthenticated />;
+  }
 
   return (
     <>

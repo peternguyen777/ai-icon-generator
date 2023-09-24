@@ -39,15 +39,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
         disableTransitionOnChange
       >
         <SessionProvider session={session}>
-          <main className={`${clash.variable}`}>
-            <div className="flex min-h-screen flex-col">
-              <div className="flex-grow">
-                <Header />
-                <Toaster />
-                <Component {...pageProps} />
-              </div>
-              <Footer />
+          <main className={`${clash.variable} flex min-h-screen flex-col`}>
+            <div className="flex flex-grow flex-col">
+              <Header />
+              <Toaster />
+              <Component {...pageProps} />
             </div>
+            <Footer />
           </main>
         </SessionProvider>
       </ThemeProvider>
