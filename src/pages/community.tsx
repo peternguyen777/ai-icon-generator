@@ -4,7 +4,9 @@ import { Collection } from "~/components/imagePreview/collection";
 import { api } from "~/utils/api";
 
 const CommunityPage: NextPage = () => {
-  const icons = api.icons.getCommunityIcons.useQuery({ size: 48 });
+  const { data, isLoading } = api.icons.getCommunityIcons.useQuery({
+    size: 48,
+  });
 
   return (
     <>
@@ -20,7 +22,7 @@ const CommunityPage: NextPage = () => {
         <div className="flex items-center justify-between">
           <h2>Community</h2>
         </div>
-        {icons.data && <Collection data={icons.data} />}
+        <Collection data={data} isLoading={isLoading} />
       </main>
     </>
   );
