@@ -16,7 +16,7 @@ const TopSection = () => {
   };
 
   return (
-    <section className="container flex flex-col items-center px-4 py-24 sm:px-8 sm:pt-20">
+    <section className="container flex flex-col items-center px-4 pb-12 pt-16 sm:px-8 sm:pb-16 sm:pt-20">
       <Link href="/community">
         <p className="animate-bounce rounded-full bg-secondary px-6 py-3 text-center text-sm">
           🦮🐕 Say hello to our new friends! 🐩🐕‍🦺

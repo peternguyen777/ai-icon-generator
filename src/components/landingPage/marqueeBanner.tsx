@@ -27,9 +27,9 @@ const MarqueeImages = () => {
 
   if (marqueeImages.isLoading)
     return Array.from({ length: 11 }, (_, i) => (
-      <div key={i} className="mx-2 h-[192px] w-[192px]">
+      <div key={i} className="relative mx-2">
         <Skeleton className="h-[192px] w-[192px] rounded-lg" />
-        <Skeleton className="mt-2 h-[22px] w-[90px] rounded-full" />
+        <Skeleton className="absolute mt-2 h-[22px] w-[60px] rounded-full" />
       </div>
     ));
 
@@ -40,7 +40,7 @@ const MarqueeImages = () => {
         return (
           <div
             key={icon.id}
-            className="mx-2 h-[192px] w-[192px] rounded-lg border transition-transform duration-200 hover:scale-105"
+            className="relative mx-2 h-[192px] w-[192px] rounded-lg border transition-transform duration-200 hover:scale-105"
           >
             <Image
               height={192}
@@ -50,7 +50,7 @@ const MarqueeImages = () => {
               className="rounded-lg"
               priority
             />
-            <Badge variant="secondary" className="mt-2">
+            <Badge variant="secondary" className="absolute mt-2">
               {capitalizeString(icon.breed)}
             </Badge>
           </div>
