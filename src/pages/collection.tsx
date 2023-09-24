@@ -1,9 +1,11 @@
 import { type NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
 import { Collection } from "~/components/imagePreview/collection";
 import { PaginationBar } from "~/components/imagePreview/pagination-bar";
 import { api } from "~/utils/api";
+import Unauthenticated from "./unauthenticated";
 
 const PAGE_SIZE = 48;
 
@@ -14,6 +16,12 @@ const CollectionPage: NextPage = () => {
   const { data, isLoading } = api.icons.getIcons.useQuery({
     page: currentPage,
   });
+
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    return <Unauthenticated />;
+  }
 
   return (
     <>

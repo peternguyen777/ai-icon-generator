@@ -27,7 +27,7 @@ export function UserNavLoggedIn({ userData }: { userData: Session }) {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage src={userData.user.image ?? ""} alt="@shadcn" />
-            <AvatarFallback>PN</AvatarFallback>
+            <AvatarFallback />
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -97,7 +97,7 @@ export function UserNavLoggedOut() {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage src="/02.png" alt="login" />
-            <AvatarFallback>PN</AvatarFallback>
+            <AvatarFallback />
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

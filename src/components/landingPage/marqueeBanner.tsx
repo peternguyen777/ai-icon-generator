@@ -72,10 +72,10 @@ const MarqueeBanner = () => {
 
   return (
     <div className="relative flex overflow-x-hidden">
-      <div className="flex animate-marquee whitespace-nowrap pb-32 pt-4">
+      <div className="flex animate-marquee whitespace-nowrap pb-[94px] pt-4 sm:pb-[110px]">
         <MarqueeImages isLoading={isLoading} data={data} />
       </div>
-      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-32 pt-4">
+      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-[94px] pt-4 sm:pb-[110px]">
         <MarqueeImages isLoading={isLoading} data={data} />
       </div>
     </div>
