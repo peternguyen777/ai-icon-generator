@@ -17,9 +17,9 @@ const Testimonials = () => {
             <div className="mt-4 flex -translate-x-5 items-center gap-4 lg:mt-0">
               <Avatar className="h-10 w-10">
                 <AvatarImage src="/05.png" alt="Sophia Miller" />
-                <AvatarFallback>SM</AvatarFallback>
+                <AvatarFallback>AK</AvatarFallback>
               </Avatar>
-              <p>Sophia Miller</p>
+              <p>Aisha Khan</p>
             </div>
           </div>
           <div className="ml-5 flex flex-col justify-between border-l-2">
