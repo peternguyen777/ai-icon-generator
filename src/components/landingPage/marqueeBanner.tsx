@@ -4,15 +4,20 @@ import type { GeneratedImages } from "~/pages/generate";
 import { api } from "~/utils/api";
 import { Badge } from "../ui/badge";
 import { Skeleton } from "../ui/skeleton";
+import type { Dispatch, SetStateAction } from "react";
 
 const BUCKET_NAME = "ai-icon-generator2";
 
 const MarqueeImages = ({
   data,
   isLoading,
+  image,
+  setImage,
 }: {
   data?: GeneratedImages;
   isLoading: boolean;
+  image: GeneratedImages[number];
+  setImage: Dispatch<SetStateAction<GeneratedImages[number]>>;
 }) => {
   if (isLoading)
     return (
@@ -33,14 +38,19 @@ const MarqueeImages = ({
         return (
           <div
             key={icon.id}
-            className="mx-2 w-[192px] transition-transform duration-200 hover:scale-105"
+            className={`mx-2 w-[192px] cursor-pointer transition-transform duration-200 hover:scale-105 `}
           >
             <Image
               height={192}
               width={192}
               src={imageUrl}
               alt={icon.breed}
-              className="rounded-lg border"
+              className={`rounded-lg ${
+                icon.id === image.id
+                  ? `outline outline-[3px] outline-offset-4 outline-primary`
+                  : `border`
+              }`}
+              onClick={() => setImage(icon)}
               priority
             />
             <Badge variant="secondary" className="mt-2">
@@ -53,7 +63,13 @@ const MarqueeImages = ({
   );
 };
 
-const MarqueeBanner = () => {
+const MarqueeBanner = ({
+  image,
+  setImage,
+}: {
+  image: GeneratedImages[number];
+  setImage: Dispatch<SetStateAction<GeneratedImages[number]>>;
+}) => {
   const { data, isLoading } = api.icons.getIconsByIds.useQuery({
     imageIds: [
       "clmu9wox10023q5wq2igs8ako",
@@ -62,7 +78,8 @@ const MarqueeBanner = () => {
       "clmt64d910001tlqdbw7f2utd",
       "clmu9g7yy001pq5wqidgn2uj8",
       "clmstm24g0029tlv7zshfce48",
-      "clmsud05f003dtlv7nksr3bqq",
+      // "clmsud05f003dtlv7nksr3bqq",
+      "clmx9bgur0001mk08lnpv9jb1",
       "clmtd3kbp0005js08n45vmmi3",
       "clmspu8wy0007tlv7yx27sv0n",
       "clmuqr2kr000dq5xo72028k6d",
@@ -72,11 +89,21 @@ const MarqueeBanner = () => {
 
   return (
     <div className="relative flex overflow-x-hidden">
-      <div className="flex animate-marquee whitespace-nowrap pb-[94px] pt-4 sm:pb-[110px]">
-        <MarqueeImages isLoading={isLoading} data={data} />
+      <div className="flex animate-marquee whitespace-nowrap pb-20 pt-4">
+        <MarqueeImages
+          isLoading={isLoading}
+          data={data}
+          image={image}
+          setImage={setImage}
+        />
       </div>
-      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-[94px] pt-4 sm:pb-[110px]">
-        <MarqueeImages isLoading={isLoading} data={data} />
+      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-20 pt-4">
+        <MarqueeImages
+          isLoading={isLoading}
+          data={data}
+          image={image}
+          setImage={setImage}
+        />
       </div>
     </div>
   );

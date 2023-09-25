@@ -34,7 +34,7 @@ const TopSection = () => {
         className="mt-8 cursor-pointer rounded-full transition-transform duration-200 hover:scale-110"
         onClick={loginRedirectHandler}
       >
-        Generate your icons today
+        Start generating now
       </Button>
     </section>
   );
