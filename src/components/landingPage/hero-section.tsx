@@ -1,19 +1,9 @@
-import { signIn, useSession } from "next-auth/react";
-import { Button } from "../ui/button";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import useLoginRedirect from "~/hooks/useLoginRedirect";
+import { Button } from "../ui/button";
 
-const TopSection = () => {
-  const session = useSession();
-  const router = useRouter();
-
-  const loginRedirectHandler = async () => {
-    if (session.data) {
-      await router.push("/generate");
-    } else {
-      await signIn("google", { callbackUrl: "/generate" });
-    }
-  };
+const HeroSection = () => {
+  const { loginRedirectHandler } = useLoginRedirect();
 
   return (
     <section className="container flex flex-col items-center px-4 pb-12 pt-16 sm:px-8 sm:pb-16 sm:pt-20">
@@ -34,10 +24,10 @@ const TopSection = () => {
         className="mt-8 cursor-pointer rounded-full transition-transform duration-200 hover:scale-110"
         onClick={loginRedirectHandler}
       >
-        Generate your icons today
+        Start generating now
       </Button>
     </section>
   );
 };
 
-export default TopSection;
+export default HeroSection;

@@ -5,7 +5,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { GenerateIconForm } from "~/components/generateIconForm/GenerateIconForm";
+import { GenerateIconForm } from "~/components/generateIconForm/generate-icon-form";
 import { Spinner } from "~/components/icons/spinner";
 import { DownloadButton } from "~/components/imagePreview/download-button";
 import { DialogContentImage } from "~/components/imagePreview/image-dialog";

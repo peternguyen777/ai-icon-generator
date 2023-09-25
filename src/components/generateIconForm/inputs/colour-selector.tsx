@@ -14,36 +14,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import { type InferredFormSchema } from "../GenerateIconForm";
+import type { InferredFormSchema } from "../generate-icon-form";
 import { ScrollArea } from "~/components/ui/scroll-area";
 
-const STYLES = [
-  "3d Rendered",
-  "Anime",
-  "Charcoal",
-  "Collage",
-  "Cyberpunk",
-  "Impressionist",
-  "Minimalism",
-  "Pencil Sketch",
-  "Sticker",
-  "Steampunk",
-  "Vector",
-  "Vintage",
-  "Watercolor",
+const COLOURS = [
+  "Blue",
+  "Red",
+  "Pink",
+  "Green",
+  "Orange",
+  "Yellow",
+  "White",
+  "Black",
 ];
 
-export const StyleSelector = () => {
+export const ColourSelector = () => {
   const form = useFormContext<InferredFormSchema>();
 
   return (
     <FormField
       control={form.control}
-      name="style"
+      name="colour"
       defaultValue=""
       render={({ field }) => (
         <FormItem>
-          <FormLabel>3. Style</FormLabel>
+          <FormLabel>4. Colour</FormLabel>
           <Select
             onValueChange={field.onChange}
             defaultValue={field.value}
@@ -56,16 +51,16 @@ export const StyleSelector = () => {
             </FormControl>
             <SelectContent>
               <ScrollArea className="h-[240px]">
-                {STYLES.map((style) => (
-                  <SelectItem key={style} value={style.toLowerCase()}>
-                    {style}
+                {COLOURS.map((colour) => (
+                  <SelectItem key={colour} value={colour.toLowerCase()}>
+                    {colour}
                   </SelectItem>
                 ))}
               </ScrollArea>
             </SelectContent>
           </Select>
           <div className="flex justify-between">
-            <FormDescription>Pick your style</FormDescription>
+            <FormDescription>Pick your colour</FormDescription>
             <FormMessage />
           </div>
         </FormItem>
