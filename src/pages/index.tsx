@@ -42,8 +42,8 @@ const HomePage: NextPage = () => {
         <MarqueeBanner image={image} setImage={setImage} />
         <PreviewSection image={image} />
         <DemoSection />
-        <Pricing />
         <Testimonials />
+        <Pricing />
       </main>
     </>
   );

@@ -72,7 +72,7 @@ const PricingCard = ({
 
 const Pricing = () => {
   return (
-    <section className="container px-4 pt-16 sm:px-8">
+    <section className="container px-4 pb-16 pt-16 sm:px-8 sm:pb-28">
       <div className="mx-auto max-w-4xl">
         <h2 className="text-left ">Pricing</h2>
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">

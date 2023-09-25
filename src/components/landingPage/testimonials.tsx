@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Testimonials = () => {
   return (
-    <section className="container px-4 py-16 sm:px-8">
+    <section className="container px-4 pt-16 sm:px-8">
       <div className="mx-auto max-w-4xl">
         <h2 className="text-left ">What our users say</h2>
         <div className="mt-10 grid grid-cols-1 gap-6 lg:min-h-[250px] lg:grid-cols-3">
