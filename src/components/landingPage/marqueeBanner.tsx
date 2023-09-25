@@ -22,7 +22,7 @@ const MarqueeImages = ({
   if (isLoading)
     return (
       <>
-        {Array.from({ length: 11 }, (_, i) => (
+        {Array.from({ length: 12 }, (_, i) => (
           <div key={i} className="mx-2">
             <Skeleton className="h-[192px] w-[192px] rounded-lg" />
             <Skeleton className="mt-2 h-[22px] w-[60px] rounded-full" />
@@ -78,7 +78,7 @@ const MarqueeBanner = ({
       "clmt64d910001tlqdbw7f2utd",
       "clmu9g7yy001pq5wqidgn2uj8",
       "clmstm24g0029tlv7zshfce48",
-      // "clmsud05f003dtlv7nksr3bqq",
+      "clmsud05f003dtlv7nksr3bqq",
       "clmx9bgur0001mk08lnpv9jb1",
       "clmtd3kbp0005js08n45vmmi3",
       "clmspu8wy0007tlv7yx27sv0n",
@@ -89,7 +89,7 @@ const MarqueeBanner = ({
 
   return (
     <div className="relative flex overflow-x-hidden">
-      <div className="flex animate-marquee whitespace-nowrap pb-20 pt-4">
+      <div className="flex animate-marquee whitespace-nowrap pb-16 pt-4">
         <MarqueeImages
           isLoading={isLoading}
           data={data}
@@ -97,7 +97,7 @@ const MarqueeBanner = ({
           setImage={setImage}
         />
       </div>
-      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-20 pt-4">
+      <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap pb-16 pt-4">
         <MarqueeImages
           isLoading={isLoading}
           data={data}

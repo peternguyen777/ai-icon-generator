@@ -18,7 +18,7 @@ const SampleImage = ({ image }: { image: GeneratedImages[number] }) => {
   const imageWidth = useResponsiveImage();
 
   return (
-    <Card className="rounded-lg shadow-md lg:col-span-2">
+    <Card className="shadow-md lg:col-span-2">
       <CardHeader>
         {image.User?.name && (
           <CardTitle>
@@ -67,11 +67,11 @@ const SampleImage = ({ image }: { image: GeneratedImages[number] }) => {
 
 const MidSection = ({ image }: { image: GeneratedImages[number] }) => {
   return (
-    <section className="sm:px-8s container flex flex-col items-center px-4">
+    <section className="container mb-16 flex flex-col items-center px-4 sm:px-8">
       <h2 className="text-center">Powerful Features for Icon Creation</h2>
-      <div className="my-10 max-w-5xl lg:grid lg:grid-cols-3 lg:gap-24">
+      <div className="mt-10 max-w-5xl lg:grid lg:grid-cols-3 lg:gap-16">
         <SampleImage image={image} />
-        <div className="mt-16 space-y-10 lg:col-span-1 lg:my-auto">
+        <div className="mt-10 space-y-10 lg:col-span-1 lg:my-auto">
           <div>
             <Bot height={30} width={30} />
             <h4 className="mb-4 mt-1">AI Powered:</h4>
