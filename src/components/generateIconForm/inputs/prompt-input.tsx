@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "../../ui/form";
 import { Input } from "../../ui/input";
-import type { InferredFormSchema } from "../GenerateIconForm";
+import type { InferredFormSchema } from "../generate-icon-form";
 
 export const PromptInput = () => {
   const form = useFormContext<InferredFormSchema>();

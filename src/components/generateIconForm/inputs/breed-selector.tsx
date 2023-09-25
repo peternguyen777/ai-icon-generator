@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import type { InferredFormSchema } from "../GenerateIconForm";
+import type { InferredFormSchema } from "../generate-icon-form";
 import { ScrollArea } from "~/components/ui/scroll-area";
 
 const BREEDS = [

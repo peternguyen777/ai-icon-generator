@@ -7,12 +7,12 @@ import { toast } from "~/components/ui/use-toast";
 import type { GeneratedImages } from "~/pages/generate";
 import { api } from "~/utils/api";
 import { CardContent, CardFooter } from "../ui/card";
-import { BreedSelector } from "./inputs/breedSelector";
-import { ColourSelector } from "./inputs/colourSelector";
-import { NumberOfIconsInput } from "./inputs/numberOfIconsInput";
-import { PromptInput } from "./inputs/promptInput";
-import { StyleSelector } from "./inputs/styleSelector";
-import { SubmitOrBuyCreditsButton } from "./inputs/submitButton";
+import { BreedSelector } from "./inputs/breed-selector";
+import { ColourSelector } from "./inputs/colour-selector";
+import { NumberOfIconsInput } from "./inputs/number-of-icons-input";
+import { PromptInput } from "./inputs/prompt-input";
+import { StyleSelector } from "./inputs/style-selector";
+import { SubmitOrBuyCreditsButton } from "./inputs/submit-button";
 
 const FormSchema = z.object({
   breed: z.string().nonempty("Required"),

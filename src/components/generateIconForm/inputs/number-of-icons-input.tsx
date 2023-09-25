@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import { type InferredFormSchema } from "../GenerateIconForm";
+import { type InferredFormSchema } from "../generate-icon-form";
 
 export const NumberOfIconsInput = () => {
   const form = useFormContext<InferredFormSchema>();
