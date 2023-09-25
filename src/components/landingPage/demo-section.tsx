@@ -23,7 +23,7 @@ const DemoSection = () => {
             muted
             autoPlay
             loop
-            className="w-full rounded-lg border lg:col-span-5"
+            className="w-full rounded-lg border shadow-md lg:col-span-5"
           >
             <source src="/Demo.mp4" />
           </video>

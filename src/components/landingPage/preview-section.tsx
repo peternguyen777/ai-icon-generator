@@ -65,11 +65,11 @@ const SampleImage = ({ image }: { image: GeneratedImages[number] }) => {
   );
 };
 
-const MidSection = ({ image }: { image: GeneratedImages[number] }) => {
+const PreviewSection = ({ image }: { image: GeneratedImages[number] }) => {
   return (
-    <section className="container mb-16 flex flex-col items-center px-4 sm:px-8">
+    <section className="container mb-16 px-4 sm:px-8">
       <h2 className="text-center">Powerful Features for Icon Creation</h2>
-      <div className="mt-10 max-w-5xl lg:grid lg:grid-cols-3 lg:gap-16">
+      <div className="mx-auto mt-10 max-w-5xl lg:grid lg:grid-cols-3 lg:gap-16">
         <SampleImage image={image} />
         <div className="mt-10 space-y-10 lg:col-span-1 lg:my-auto">
           <div>
@@ -103,4 +103,4 @@ const MidSection = ({ image }: { image: GeneratedImages[number] }) => {
   );
 };
 
-export default MidSection;
+export default PreviewSection;

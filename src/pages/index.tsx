@@ -1,11 +1,12 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import DemoSection from "~/components/landingPage/demoSection";
-import MarqueeBanner from "~/components/landingPage/marqueeBanner";
-import MidSection from "~/components/landingPage/midSection";
+import DemoSection from "~/components/landingPage/demo-section";
+import HeroSection from "~/components/landingPage/hero-section";
+import MarqueeBanner from "~/components/landingPage/marquee-banner";
+import PreviewSection from "~/components/landingPage/preview-section";
+import Pricing from "~/components/landingPage/pricing";
 import Testimonials from "~/components/landingPage/testimonials";
-import TopSection from "~/components/landingPage/topSection";
 import type { GeneratedImages } from "./generate";
 
 const defaultImage: GeneratedImages[number] = {
@@ -37,10 +38,11 @@ const HomePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <TopSection />
+        <HeroSection />
         <MarqueeBanner image={image} setImage={setImage} />
-        <MidSection image={image} />
+        <PreviewSection image={image} />
         <DemoSection />
+        <Pricing />
         <Testimonials />
       </main>
     </>
