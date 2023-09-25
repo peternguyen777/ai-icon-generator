@@ -72,9 +72,9 @@ const MarqueeBanner = ({
 }) => {
   const { data, isLoading } = api.icons.getIconsByIds.useQuery({
     imageIds: [
+      "clmywpunf0005lb08prxt47ni",
       "clmu9wox10023q5wq2igs8ako",
       "clmu9hgp0001tq5wqv0i08heh",
-      "clmspx0pv000htlv76bw8gdlf",
       "clmt64d910001tlqdbw7f2utd",
       "clmu9g7yy001pq5wqidgn2uj8",
       "clmstm24g0029tlv7zshfce48",

@@ -42,7 +42,7 @@ const PricingCard = ({
       </CardHeader>
       <CardContent className="flex flex-col justify-between">
         <div>
-          <span className="flex font-clash text-2xl font-bold">{`$ ${price}`}</span>
+          <span className="flex font-clash text-2xl font-bold">{`${price}`}</span>
           <div className="mt-6">
             {properties.map((item, index) => (
               <>
@@ -79,14 +79,14 @@ const Pricing = () => {
           <PricingCard
             title="Trial"
             description="For personal use and exploration of AI technology."
-            price="0"
+            price="Free"
             properties={["5 included credits", "Personal Gallery"]}
             includeButton
           />
           <PricingCard
             title="Premium"
             description="Perfect for advanced users and dog art aficionados."
-            price="5.00"
+            price="$5.00"
             properties={[
               "100 included credits",
               "Personal Gallery",
@@ -96,7 +96,7 @@ const Pricing = () => {
           <PricingCard
             title="Professional"
             description="Perfect for businesses and advanced users looking for a premium service."
-            price="20.00 monthly"
+            price="$20.00/month"
             properties={[
               "Unlimited credits",
               "Professional Gallery",
