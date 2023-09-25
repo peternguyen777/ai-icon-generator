@@ -5,7 +5,7 @@ const Testimonials = () => {
     <section className="container px-4 pt-16 sm:px-8">
       <div className="mx-auto max-w-4xl">
         <h2 className="text-left ">What our users say</h2>
-        <div className="mt-10 grid grid-cols-1 gap-6 lg:min-h-[250px] lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-10 lg:min-h-[250px] lg:grid-cols-3 lg:gap-6">
           <div className="ml-5 flex flex-col justify-between border-l-2">
             <blockquote className="pl-6 italic">
               &quot;I&apos;m seriously impressed with the AI dog icon generator!
