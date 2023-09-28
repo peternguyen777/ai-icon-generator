@@ -1,28 +1,16 @@
-# Create T3 App
+![hero image](https://www.peter-nguyen.dev/detail/desktop/image-woofai-hero@2x.jpg)
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+### Deployment: https://ai-icon-generator-orpin.vercel.app/
 
-## What's next? How do I make an app with this?
+**NextJS / Typescript / TRPC / TailwindCSS / PrismaORM / Postgresql / NextAuth / DALL-E2 / Amazon S3 / Stripe**
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+---
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+**_WoofAI_** is a micro SaaS platform that introduces a new approach to creating, sharing, and downloading pet icon art. This full-stack web application is built using the T3 stack, which includes Next.js, TypeScript, TRPC, and Tailwind, prioritizing performance and user experience.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+On the frontend, WoofAI utilizes Tailwind CSS, the Shadcn UI library, and React Hook Form to create an intuitive and visually appealing user interface. On the backend, the application leverages OpenAI's DALL-E2 text-to-image generator to enhance the pet icon art experience. User and icon data are managed securely through Prisma ORM with a PostgreSQL database, and images are hosted on Amazon S3 for reliability.
 
-## Learn More
+WoofAI offers a user-friendly pricing model, including a free tier for platform exploration. Additional credits can be easily purchased through the integration of the Stripe API. Stripe webhooks are implemented to ensure seamless payment processing, with event data logged in the database upon successful transactions. WoofAI aims to provide accessible pet icon art, blending creativity and technology for user convenience.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+![preview image 1](https://www.peter-nguyen.dev/detail/desktop/image-woofai-preview-1@2x.jpg)
+![preview image 2](https://www.peter-nguyen.dev/detail/desktop/image-woofai-preview-2@2x.jpg)
