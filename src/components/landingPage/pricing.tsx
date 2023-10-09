@@ -46,7 +46,7 @@ const PricingCard = ({
           <div className="mt-6">
             {properties.map((item, index) => (
               <>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2" key={item}>
                   {index === 0 ? <CheckCircle /> : <CheckCircle2 />}
                   <p className="text-sm">{item}</p>
                 </div>
