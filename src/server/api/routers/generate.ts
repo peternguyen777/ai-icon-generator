@@ -68,45 +68,62 @@ export const generateRouter = createTRPCRouter({
 
       const finalPrompt = `A ${input.breed} dog ${input.prompt}. Icon in ${input.style} style, ${input.colour} tint, happy mood, high-quality, dramatic lighting.`;
 
-      const base64EncodedImages = await generateIcon(
-        finalPrompt,
-        input.numberOfIcons
-      );
+      try {
+        const base64EncodedImages = await generateIcon(
+          finalPrompt,
+          input.numberOfIcons
+        );
 
-      const createdIcons = await Promise.all(
-        base64EncodedImages.map(async (image) => {
-          const icon = await ctx.prisma.icon.create({
-            data: {
-              breed: input.breed,
-              prompt: input.prompt,
-              userId: ctx.session.user.id,
-              colour: input.colour,
-              style: input.style,
-            },
-            include: {
-              User: {
-                select: {
-                  image: true,
-                  name: true,
+        const createdIcons = await Promise.all(
+          base64EncodedImages.map(async (image) => {
+            const icon = await ctx.prisma.icon.create({
+              data: {
+                breed: input.breed,
+                prompt: input.prompt,
+                userId: ctx.session.user.id,
+                colour: input.colour,
+                style: input.style,
+              },
+              include: {
+                User: {
+                  select: {
+                    image: true,
+                    name: true,
+                  },
                 },
               },
+            });
+
+            await s3
+              .putObject({
+                Bucket: BUCKET_NAME,
+                Body: Buffer.from(image, "base64"),
+                Key: icon.id,
+                ContentEncoding: "base64",
+                ContentType: "image/png",
+              })
+              .promise();
+
+            return icon;
+          })
+        );
+
+        return createdIcons.map((icon) => icon);
+      } catch (error) {
+        await ctx.prisma.user.update({
+          where: {
+            id: ctx.session.user.id,
+          },
+          data: {
+            credits: {
+              increment: input.numberOfIcons,
             },
-          });
-
-          await s3
-            .putObject({
-              Bucket: BUCKET_NAME,
-              Body: Buffer.from(image, "base64"),
-              Key: icon.id,
-              ContentEncoding: "base64",
-              ContentType: "image/png",
-            })
-            .promise();
-
-          return icon;
-        })
-      );
-
-      return createdIcons.map((icon) => icon);
+          },
+        });
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Image generation failed",
+        });
+      }
     }),
 });
